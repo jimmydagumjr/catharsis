@@ -1,0 +1,114 @@
+/*font helvetica*/
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Th.otf) format('truetype');
+  font-weight: 100;
+  /*thin*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-UltLt.otf) format('truetype');
+  font-weight: 200;
+  /*extra/ultra light*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Lt.otf) format('truetype');
+  font-weight: 300;
+  /*light*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Roman.otf) format('truetype');
+  font-weight: 400;
+  /*normal*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Md.otf) format('truetype');
+  font-weight: 500;
+  /*medium*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Bd.otf) format('truetype');
+  font-weight: 700;
+  /*bold*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Hv.otf) format('truetype');
+  font-weight: 800;
+  /*heavy(extra bold)*/
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Blk.otf) format('truetype');
+  font-weight: 900;
+  /*black*/
+}
+
+/*font courier*/
+@font-face {
+  font-family: 'Courier';
+  src: url(fonts/Courier/CourierStd.otf) format('truetype');
+  font-weight: 400;
+  /*normal*/
+}
+
+@font-face {
+  font-family: 'Courier';
+  src: url(fonts/Courier/CourierStd-Bold.otf) format('truetype');
+  font-weight: 700;
+  /*bold*/
+}
+
+:root {
+  font-family: Helvetica, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--black);
+  background-color: var(--primarycolor);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/*62.5% font-size -> 16px default to 10px*/
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*colors*/
+:root {
+  --primarycolor: #f7f7f2;
+  --white: #fff;
+  --darkred: #8B0000;
+  --black: #1f1f1e;
+  --darkgray: #3e3e3c;
+  --gray: #6d6d6d;
+  --lightgray: #cacac7;
+  --reallylightgray: #e8e8e4;
+  --hover: #acacaa;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
