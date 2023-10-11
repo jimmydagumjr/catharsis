@@ -1,9 +1,9 @@
 //import { useState } from 'react'
 //import reactLogo from './assets/react.svg'
 import Navbar from "./components/Navbar"
-import Music from "./components/pages/Music"
-import Photobook from "./components/pages/Photobook"
-import Cathartic from "./components/pages/Cathartic"
+import Music from "./pages/Music"
+import Photobook from "./pages/Gallery"
+import Cathartic from "./pages/Cathartic"
 import { Route, Routes } from "react-router-dom"
 
 function App() {

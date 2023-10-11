@@ -1,4 +1,4 @@
-import NavbarCSS from './Navbar.module.css'
+import NavbarCSS from './../assets/css/Navbar.module.css'
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
 export default function Navbar() {
@@ -7,7 +7,7 @@ export default function Navbar() {
             <div className={NavbarCSS.navContainer}>
                 <CustomLink to="/music">music</CustomLink>
                 <CustomLink to="/cathartic">logoPlaceHolder</CustomLink>
-                <CustomLink to="/photobook">photobook</CustomLink>
+                <CustomLink to="/photobook">gallery</CustomLink>
             </div>
         </nav>
     )
