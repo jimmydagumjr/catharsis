@@ -1,55 +1,55 @@
 /*font helvetica*/
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Th.otf) format('truetype');
   font-weight: 100;
   /*thin*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-UltLt.otf) format('truetype');
   font-weight: 200;
   /*extra/ultra light*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Lt.otf) format('truetype');
   font-weight: 300;
   /*light*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Roman.otf) format('truetype');
   font-weight: 400;
   /*normal*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Md.otf) format('truetype');
   font-weight: 500;
   /*medium*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Bd.otf) format('truetype');
   font-weight: 700;
   /*bold*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Hv.otf) format('truetype');
   font-weight: 800;
   /*heavy(extra bold)*/
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'HelveticaNeue';
   src: url(fonts/HelveticaNeue/HelveticaNeueLTStd-Blk.otf) format('truetype');
   font-weight: 900;
   /*black*/
@@ -71,7 +71,7 @@
 }
 
 :root {
-  font-family: Helvetica, sans-serif;
+  font-family: "HelveticaNeue", Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
