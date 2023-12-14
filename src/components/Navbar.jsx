@@ -7,7 +7,7 @@ export default function Navbar() {
             <div className={NavbarCSS.navContainer}>
                 <CustomLink to="/music">music</CustomLink>
                 <CustomLink to="/cathartic">logoPlaceHolder</CustomLink>
-                <CustomLink to="/photobook">gallery</CustomLink>
+                <CustomLink to="/gallery">gallery</CustomLink>
             </div>
         </nav>
     )

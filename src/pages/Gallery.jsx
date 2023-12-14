@@ -1,3 +1,13 @@
+import { galleryData } from './data/galleryData.jsx';
+
 export default function Gallery() {
-   return <h1>Gallery</h1>
+   return (
+      galleryData.map( photo => {
+         return (
+            <div className="box">
+               { photo.location }
+            </div>
+         )
+      })
+   );
 }

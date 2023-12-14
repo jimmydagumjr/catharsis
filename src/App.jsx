@@ -2,7 +2,7 @@
 //import reactLogo from './assets/react.svg'
 import Navbar from "./components/Navbar"
 import Music from "./pages/Music"
-import Photobook from "./pages/Gallery"
+import Gallery from "./pages/Gallery"
 import Cathartic from "./pages/Cathartic"
 import { Route, Routes } from "react-router-dom"
 
@@ -12,7 +12,7 @@ function App() {
     <Navbar />
     <Routes>
       <Route path="/music" element={<Music />} />
-      <Route path="/photobook" element={<Photobook />} />
+      <Route path="/gallery" element={<Gallery />} />
       <Route path="/cathartic" element={<Cathartic />} />
     </Routes>
   </>
