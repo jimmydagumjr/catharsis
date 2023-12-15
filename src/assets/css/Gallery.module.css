@@ -1,0 +1,56 @@
+/*photobook*/
+
+.photo_body {
+    max-width: 120rem;
+    /*width: min(80%, 1200px);*/
+    margin-inline: auto;
+    padding-top: 5%;
+}
+
+.photo_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+.card {
+    padding: 1rem;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+.card__img_container {
+    border-radius: 1.4rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.card__img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.card__details {
+    background-color: var(--white);
+    border-radius: 1.4rem;
+    padding: 1rem 1.6rem;
+    text-align: left;
+    align-self: end;
+}
+
+.card__location {
+    font-size: 1.4rem;
+    font-weight: 450;
+}
+
+.card__time {
+    font-family: "Courier";
+    font-size: 1.2rem;
+    color: var(--gray);
+}
