@@ -10,7 +10,7 @@ const cardVariants = {
    visible: {
       opacity: 1,
       y: 0
-   },
+   }
 }
 
 const Gallery = () => {
@@ -20,7 +20,7 @@ const Gallery = () => {
             <GalleryCardMap />
          </div>
       </div>
-   );
+   )
 }
 
 const GalleryCardMap = () => {
@@ -47,7 +47,6 @@ const GalleryCard = ({ photo, formattedTime }) => {
          variants={cardVariants}
          initial="hidden"
          whileInView="visible"
-         //exit={{ opacity: 0, y: 100 }}
          viewport={{
             once: true
          }}

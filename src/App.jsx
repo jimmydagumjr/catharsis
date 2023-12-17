@@ -4,7 +4,7 @@ import Gallery from "./pages/Gallery"
 import Cathartic from "./pages/Cathartic"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
-import Page from "./components/Page"
+import Page from "./components/PageAnimations"
 
 function App() {
 

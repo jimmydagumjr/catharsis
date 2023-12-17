@@ -6,6 +6,7 @@ const Page = ({ children, pageKey }) => (
       key={pageKey}
       exit={{
          opacity: 0,
+         filter: "blur(5px) brightness(1.5)",
          transition: {
             type: "tween",
             duration: 0.3
