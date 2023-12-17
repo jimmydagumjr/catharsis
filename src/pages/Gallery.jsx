@@ -13,7 +13,7 @@ const cardVariants = {
    },
 }
 
-export default function Gallery() {
+const Gallery = () => {
    return (
       <div className={GalleryCSS.photo_body}>
          <div className={GalleryCSS.photo_container}>
@@ -47,7 +47,7 @@ const GalleryCard = ({ photo, formattedTime }) => {
          variants={cardVariants}
          initial="hidden"
          whileInView="visible"
-         exit={{ opacity: 0, y: 100 }}
+         //exit={{ opacity: 0, y: 100 }}
          viewport={{
             once: true
          }}
@@ -73,3 +73,5 @@ const GalleryCard = ({ photo, formattedTime }) => {
       </motion.div>
    )
 }
+
+export default Gallery
