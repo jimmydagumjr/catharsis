@@ -7,13 +7,10 @@ const cardVariants = {
       opacity: 0,
       y: 100
    },
-   visible: (index) => ({
+   visible: {
       opacity: 1,
-      y: 0,
-      transition: {
-         delay: 0.00 * index
-      }
-   }),
+      y: 0
+   },
 }
 
 export default function Gallery() {
@@ -27,7 +24,7 @@ export default function Gallery() {
 }
 
 const GalleryCardMap = () => {
-   return galleryData.map((photo, index) => {
+   return galleryData.map((photo) => {
       // time formatting
       const formattedTime = photo.time.toLocaleDateString(undefined, {
          year: "numeric",
@@ -43,7 +40,7 @@ const GalleryCardMap = () => {
    )
 }
 
-const GalleryCard = ({ photo, formattedTime, index }) => {
+const GalleryCard = ({ photo, formattedTime }) => {
    return (
       <motion.div
          className={GalleryCSS.card}
@@ -54,11 +51,11 @@ const GalleryCard = ({ photo, formattedTime, index }) => {
          viewport={{
             once: true
          }}
-         custom={index}
          transition={{
             type: "spring",
-            damping: 3,
-            stiffness: 50,
+            mass: 0.1,
+            damping: 1,
+            stiffness: 5,
             restDelta: 0.001
          }}
       >
