@@ -73,7 +73,7 @@
     transition: 1s;
 }
 
-.logo:hover {
+.cathartic:hover {
     transform: rotate(360deg) translateZ(0);
 }
 
