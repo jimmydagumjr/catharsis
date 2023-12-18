@@ -53,7 +53,7 @@
 }
 
 .navLeft, .navRight {
-    flex: 1;
+    flex: 100;
 }
 
 .navLeft {
@@ -66,10 +66,15 @@
 
 .logo {
     width: 2.2rem;
-    height: 2.2rem;
+    height: 2.2em;
     overflow: hidden;
     flex-grow: 1;
     text-align: center;
+    transition: 1s;
+}
+
+.logo:hover {
+    transform: rotate(360deg) translateZ(0);
 }
 
 .logo svg {
