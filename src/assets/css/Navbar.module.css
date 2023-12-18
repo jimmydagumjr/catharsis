@@ -4,7 +4,7 @@
     border-radius: 1rem;
     top: 0;
     z-index: 1100;
-    padding: 1.6rem 1.6rem 0;
+    padding: 1.6rem 1.6rem 1.6rem;
 }
 
 .navContainer {
@@ -52,30 +52,28 @@
     padding: 0 2.2rem 0 2.2rem;
 }
 
+.navLeft, .navRight {
+    flex: 1;
+}
+
+.navLeft {
+    text-align: left;
+}
+
+.navRight {
+    text-align: right;
+}
+
 .logo {
     width: 2.2rem;
     height: 2.2rem;
     overflow: hidden;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .logo svg {
     fill: var(--black);
-}
-
-.line-logo {
-    height: 5.6rem;
-    justify-content: center;
-    font-size: 5rem;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateY(0);
-}
-
-.line-logo svg {
-    fill: var(--black);
-}
-
-.-flip {
-    transform: translateY(-100%);
 }
 
 .nav a {

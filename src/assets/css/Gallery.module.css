@@ -2,9 +2,8 @@
 
 .photo_body {
     max-width: 120rem;
-    /*width: min(80%, 1200px);*/
     margin-inline: auto;
-    padding-top: 5%;
+    padding-top: 1.6rem;
 }
 
 .photo_container {
