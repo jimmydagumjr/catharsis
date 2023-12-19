@@ -5,11 +5,13 @@ import Cathartic from "./pages/Cathartic"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import Page from "./components/PageAnimations"
+import MusicPlayer from "./components/MusicPlayer"
 
 function App() {
 
   return <>
     <Navbar />
+    <MusicPlayer />
     <RoutesWithAnimation />
   </>
 
