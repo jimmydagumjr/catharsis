@@ -1,0 +1,20 @@
+.playerFilter {
+    overflow: hidden;
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .playerFilter {
+        backdrop-filter: blur(135px);
+        background-color: rgba(247, 247, 242, .24);
+    }
+}
+
+.playerContainer {
+    padding: 1.6rem 1.6rem 1.6rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}

@@ -11,8 +11,8 @@ function App() {
 
   return <>
     <Navbar />
-    <MusicPlayer />
     <RoutesWithAnimation />
+    <MusicPlayer />
   </>
 
 }
