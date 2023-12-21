@@ -2,7 +2,7 @@ import React from "react"
 import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
-import customIcons from "./../assets/svgs/CustomIcons.jsx"
+import customIcons, { ShuffleButton } from "./../assets/svgs/CustomIcons.jsx"
 
 const MusicPlayer = () => {
     const onClick = () => {
@@ -61,32 +61,5 @@ class CustomAudioPlayer extends React.Component {
         )
     }
 }
-
-const ShuffleButton = ({ onClick }) => {
-    return (
-        <button onClick={onClick}>
-            <svg width="1.4rem" height="1.4rem" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M3 8h2.28a6 6 0 0 1 4.51 2.05L13.21 14a6 6 0 0 0 4.51 2H21"
-                    style={{ fill: 'none', stroke: '#000', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2 }}
-                />
-                <path
-                    style={{ fill: 'none', stroke: '#000', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2 }}
-                    d="m19 14 2 2-2 2"
-                />
-                <path
-                    style={{ fill: 'none', stroke: '#000', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2 }}
-                    d="M21 8h-3.28a6 6 0 0 0-4.51 2.05L9.79 14a6 6 0 0 1-4.51 2H3"
-                />
-                <path
-                    style={{ fill: 'none', stroke: '#000', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2 }}
-                    d="m19 6 2 2-2 2"
-                />
-            </svg>
-        </button>
-    )
-}
-
-
 
 export default MusicPlayer
