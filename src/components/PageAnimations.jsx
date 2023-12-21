@@ -9,7 +9,7 @@ const Page = ({ children, pageKey }) => (
          filter: "blur(5px) brightness(1.5)",
          transition: {
             type: "tween",
-            duration: 0.3
+            duration: 0.2
          }
       }}
    >
