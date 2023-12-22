@@ -35,3 +35,12 @@ button, input[type="submit"], input[type="reset"] {
     vertical-align: middle;
     height: 1.4rem;
 }
+
+/* .minimizeContainer {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+.minimizeContainer.minimized {
+  opacity: 0;
+} */
