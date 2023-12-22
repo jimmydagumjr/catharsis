@@ -1,66 +1,38 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton } from "./../assets/svgs/CustomIcons.jsx"
-import { motion } from "framer-motion"
+// import { motion, useAnimation } from "framer-motion"
 
 const MusicPlayer = () => {
-    // minimize functionality
-    const [isMinimized, setMinimized] = useState(false);
-    // const [audioState] = useState("playing");
+    // ignore for now will be used in volume controls; reference to audio file
+    // i.e. playerRef.current.audio.current.play();
     const playerRef = useRef();
+    const [isMinimized, setMinimized] = useState(false);
 
     const handleToggleMinimize = () => {
         setMinimized(!isMinimized);
     }
-
-    useEffect(() => {
-        console.log("useEffect triggered", isMinimized);
-        console.log(playerRef.current);
-
-        if (playerRef.current && playerRef.current.audio.current) {
-            if (isMinimized) {
-                console.log("trigger1");
-                playerRef.current.audio.current.pause();
-            }
-            else {
-                console.log("trigger2");
-                playerRef.current.audio.current.play();
-            }
-        }}, [isMinimized, playerRef])
-
-    //     if (audioState === "playing" && playerRef.current && playerRef.current.audio.current) {
-    //         playerRef.current.audio.current.play();
-    //         console.log("playTriggered");
-    //     }
-    //     else if (playerRef.current && playerRef.current.audio.current) {
-    //         playerRef.current.audio.current.pause();
-    //         console.log("pauseTriggered");
-    //     }
-    // }, [audioState, playerRef, isMinimized])
-
     return (
         <div>
             <button onClick={handleToggleMinimize}>minimize</button>
-            {!isMinimized && (
-                <div>
-                    <MusicPlayerContainer playerRef={playerRef}/>
-                </div>
-            )}
+            <div>
+                <MusicPlayerContainer playerRef={playerRef} className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`} />
+            </div>
         </div>
     )
 }
 
-const MusicPlayerContainer = ({ playerRef }) => {
-    // shuffle functionality
+const MusicPlayerContainer = ({ playerRef, className }) => {
+    // shuffle functionality for the future when playlist added
     const onClick = () => {
         console.log("shuffle clicked");
     }
 
     // music player
     return (
-        <div className={MusicPlayerCSS.playerContainer}>
+        <div className={className}>
             <div className={MusicPlayerCSS.playerFilter}>
                 <CustomAudioPlayer
                     ref={playerRef}
@@ -95,7 +67,7 @@ const MusicPlayerContainer = ({ playerRef }) => {
 const CustomAudioPlayer = React.forwardRef((props, ref) => {
     return (
         <div>
-            <AudioPlayer {...props} ref={ref}/>
+            <AudioPlayer {...props} ref={ref} />
             {/* <div>
                     <p>test</p>
                 </div> */}

@@ -18,6 +18,14 @@
     left: 0;
     right: 0;
     z-index: 100;
+    transition: .2s cubic-bezier(.5,0,.5,1);
+}
+
+.minimized {
+    opacity: 0;
+    overflow: hidden;
+    transition: .2s cubic-bezier(.5,0,.5,1);
+    pointer-events: none;
 }
 
 button, input[type="submit"], input[type="reset"] {
@@ -35,12 +43,3 @@ button, input[type="submit"], input[type="reset"] {
     vertical-align: middle;
     height: 1.4rem;
 }
-
-/* .minimizeContainer {
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-
-.minimizeContainer.minimized {
-  opacity: 0;
-} */

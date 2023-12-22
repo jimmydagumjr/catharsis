@@ -13,7 +13,7 @@ $rhap_font-family: "Courier" !default;
   width: 100%;
   padding: 1rem 1rem;
   background-color: $rhap_background-color;
-  position: sticky;
+  //position: sticky;
   border-radius: 1rem;
 
   &:focus:not(:focus-visible) {
