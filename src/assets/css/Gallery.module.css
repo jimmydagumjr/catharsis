@@ -1,12 +1,10 @@
-/*photobook*/
-
-.photo_body {
+.photoBody {
     max-width: 120rem;
     margin-inline: auto;
     padding-top: 1.6rem;
 }
 
-.photo_container {
+.photoContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
@@ -21,7 +19,7 @@ picture {
     display: block;
 }
 
-.card__img_container {
+.card__imgContainer {
     border-radius: 1.4rem;
     width: 100%;
     aspect-ratio: 1 / 1;

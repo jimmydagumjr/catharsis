@@ -1,5 +1,15 @@
-.playerContainer {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.playlistBody {
+   max-width: 120rem;
+   margin-inline: auto;
+   padding-top: 1.6rem;
+}
+
+.playlistContainer {
+   display: grid;
+}
+
+.playlistItem {
+   padding: 1rem;
+   border-color: red;
+   border-style: solid;
 }

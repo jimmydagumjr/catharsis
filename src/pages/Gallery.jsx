@@ -15,8 +15,8 @@ const cardVariants = {
 
 const Gallery = () => {
    return (
-      <div className={GalleryCSS.photo_body}>
-         <div className={GalleryCSS.photo_container}>
+      <div className={GalleryCSS.photoBody}>
+         <div className={GalleryCSS.photoContainer}>
             <GalleryCardMap />
          </div>
       </div>
@@ -58,7 +58,7 @@ const GalleryCard = ({ photo, formattedTime }) => {
             restDelta: 0.001
          }}
       >
-         <div className={GalleryCSS.card__img_container}>
+         <div className={GalleryCSS.card__imgContainer}>
             <img
                className={GalleryCSS.card__img}
                src={photo.src}
