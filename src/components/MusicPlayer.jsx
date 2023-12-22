@@ -2,13 +2,15 @@ import React, { useState, useRef } from "react"
 import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
-import customIcons, { ShuffleButton } from "./../assets/svgs/CustomIcons.jsx"
+import customIcons, { ShuffleButton, MinimizeIcon } from "../assets/svgs/PlayerCustomIcons.jsx"
 
 const MusicPlayer = () => {
     // ignore for now will be used in volume controls; reference to audio file
     // i.e. playerRef.current.audio.current.play();
     const playerRef = useRef();
     const [isMinimized, setMinimized] = useState(false);
+    // currently not in use; for fill transitions etc. in css file
+    const iconClass = isMinimized ? MusicPlayerCSS.minimizedIcon : MusicPlayerCSS.notMinimizedIcon;
 
     const handleToggleMinimize = () => {
         setMinimized(!isMinimized);
@@ -22,7 +24,10 @@ const MusicPlayer = () => {
                     className={MusicPlayerCSS.minButton}
                     onClick={handleToggleMinimize}
                 >
-                    minimize
+                    <MinimizeIcon
+                        isMinimized={isMinimized}
+                        iconClass={`${MusicPlayerCSS.minimizeIcon} ${iconClass}`}
+                    />
                 </button>
             </div>
             <div>

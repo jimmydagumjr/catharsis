@@ -47,6 +47,19 @@
     height: 1.4rem;
 }
 
+.minButton svg {
+    color: var(--black);
+}
+
+.minButton svg:hover {
+    fill: var(--darkgray);
+    transition: 0.3s;
+}
+
+.minimizeIcon path {
+    transition: 0.2s ease; /* Add a transition for the 'd' attribute */
+}
+
 button,
 input[type="submit"],
 input[type="reset"] {
