@@ -3,7 +3,6 @@ import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton } from "./../assets/svgs/CustomIcons.jsx"
-// import { motion, useAnimation } from "framer-motion"
 
 const MusicPlayer = () => {
     // ignore for now will be used in volume controls; reference to audio file
@@ -16,9 +15,21 @@ const MusicPlayer = () => {
     }
     return (
         <div>
-            <button onClick={handleToggleMinimize}>minimize</button>
+            <div className={MusicPlayerCSS.minButtonContainer}
+                style={{ bottom: isMinimized ? '1.4rem' : '10.2rem' }}
+            >
+                <button
+                    className={MusicPlayerCSS.minButton}
+                    onClick={handleToggleMinimize}
+                >
+                    minimize
+                </button>
+            </div>
             <div>
-                <MusicPlayerContainer playerRef={playerRef} className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`} />
+                <MusicPlayerContainer
+                    playerRef={playerRef}
+                    className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`}
+                />
             </div>
         </div>
     )
