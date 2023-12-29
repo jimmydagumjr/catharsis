@@ -14,7 +14,7 @@ export const musicData = [
         url: null
     },
     {
-        title: "ibihywnm",
+        title: "i'll burn in hopes you will notice me",
         artist: "st jimmy",
         img_src: "IMG-8262.jpg",
         src: "https://files.catbox.moe/6li9j3.mp3",

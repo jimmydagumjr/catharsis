@@ -6,10 +6,18 @@
 
 .playlistContainer {
    display: grid;
+   /* grid-template-rows: repeat(auto-fit, minmax(16rem, 1fr)); */
 }
 
 .playlistItem {
+   display: flex;
    padding: 1rem;
-   border-color: red;
-   border-style: solid;
+   justify-content: space-between;
+   background-color: var(--white);
+   border-radius: 1.4rem;
+}
+
+.imageContainer {
+   padding: 1rem;
+   border-radius: 1.4rem;
 }
