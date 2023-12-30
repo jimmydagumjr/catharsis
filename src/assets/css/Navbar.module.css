@@ -1,22 +1,22 @@
 .nav {
-    height: 7.2rem;
-    position: sticky;
+    height: var(--headerheight);
+    position: fixed;
     border-radius: 1rem;
     top: 0;
     z-index: 1100;
-    padding: 1.6rem 1.6rem 1.6rem;
+    padding: 1.6rem 1.6rem 0;
+    width: 100%;
 }
 
 .navContainer {
-    position: sticky;
     padding: 0;
     box-sizing: border-box;
+    position: relative;
 }
 
 .navFilter {
     height: 5.6rem;
     border-radius: 1.6rem;
-    overflow: hidden;
 }
 
 @supports (height: 100dvh) {
@@ -67,15 +67,15 @@
 .logo {
     width: 2.2rem;
     height: 2.2em;
-    overflow: hidden;
+    overflow: clip;
     flex-grow: 1;
     text-align: center;
     transition: 1s;
 }
 
-.cathartic:hover {
+/* .cathartic:hover {
     transform: rotate(360deg) translateZ(0);
-}
+} */
 
 .logo svg {
     fill: var(--black);
@@ -85,10 +85,9 @@
     font-size: 1.4rem;
     text-decoration: none;
     color: var(--black);
-    background-color: transparent;
 }
 
-.nav a:hover {
+/* .nav a:hover {
     color: var(--hover);
     transition: 0.3s;
-}
+} */

@@ -95,7 +95,7 @@ html {
   box-sizing: border-box;
 }
 
-/*colors*/
+/*colors & vars*/
 :root {
   --primarycolor: #f7f7f2;
   --white: #fff;
@@ -106,6 +106,7 @@ html {
   --lightgray: #cacac7;
   --reallylightgray: #e8e8e4;
   --hover: #acacaa;
+  --headerheight: 7.2rem;
 }
 
 body {
