@@ -21,5 +21,4 @@ ADD CIRCLE AND BLUR FILTER AROUND SVG
 
 BUG WHEN HOVERING NAVBAR MENU NAVBAR IS IN BACKGROUND OR SMTH
 
-
-all the css stuff
+add individual element animations on page exit
