@@ -18,7 +18,7 @@
    border-radius: 1.4rem;
    aspect-ratio: 1/1;
    width: 10%;
-   min-width: 6rem;
+   min-width: 6.6rem;
    margin-left: 1rem;
 }
 
@@ -33,6 +33,7 @@
    margin-left: 1rem;
    margin-right: 1rem;
    width: 100%;
+   min-height: 6.6rem;
    padding-left: 1rem;
    display: flex;
    flex-direction: column;
