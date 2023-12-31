@@ -77,3 +77,15 @@ input[type="reset"] {
     vertical-align: middle;
     height: 1.4rem;
 }
+
+.customAudioPlayer {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (orientation: portrait) {
+    .detailsContainer,
+    .volumeContainer {
+        display: none; /* Hide the containers in portrait mode */
+    }
+}

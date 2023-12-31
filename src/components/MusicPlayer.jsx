@@ -3,6 +3,7 @@ import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton, MinimizeIcon } from "../assets/svgs/PlayerCustomIcons.jsx"
+import { musicData } from "../pages/data/musicData.jsx"
 
 const MusicPlayer = () => {
     // ignore for now will be used in volume controls; reference to audio file
@@ -10,7 +11,7 @@ const MusicPlayer = () => {
     const playerRef = useRef();
     const [isMinimized, setMinimized] = useState(false);
     // currently not in use; for fill transitions etc. in css file
-    const iconClass = isMinimized ? MusicPlayerCSS.minimizedIcon : MusicPlayerCSS.notMinimizedIcon;
+    // const iconClass = isMinimized ? MusicPlayerCSS.minimizedIcon : MusicPlayerCSS.notMinimizedIcon;
 
     const handleToggleMinimize = () => {
         setMinimized(!isMinimized);
@@ -26,7 +27,7 @@ const MusicPlayer = () => {
                 >
                     <MinimizeIcon
                         isMinimized={isMinimized}
-                        iconClass={`${MusicPlayerCSS.minimizeIcon} ${iconClass}`}
+                    // iconClass={`${MusicPlayerCSS.minimizeIcon} ${iconClass}`}
                     />
                 </button>
             </div>
@@ -46,13 +47,36 @@ const MusicPlayerContainer = ({ playerRef, className }) => {
         console.log("shuffle clicked");
     }
 
+    const [currentTrack, setTrackIndex] = useState(0)
+    const handleClickNext = () => {
+        setTrackIndex((currentTrack) =>
+            currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
+        )
+    }
+
+    const handleClickPrev = () => {
+        setTrackIndex((currentTrack) =>
+            currentTrack > 0 ? currentTrack - 1 : musicData.length - 1
+        )
+    }
+
+    const handleEnd = () => {
+        setTrackIndex((currentTrack) =>
+            currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
+        )
+    }
+
     // music player
     return (
         <div className={className}>
             <div className={MusicPlayerCSS.playerFilter}>
                 <CustomAudioPlayer
                     ref={playerRef}
-                    src="https://files.catbox.moe/w5scaz.mp3"
+                    src={musicData[currentTrack].src}
+                    onClickNext={handleClickNext}
+                    onClickPrevious={handleClickPrev}
+                    onEnded={handleEnd}
+                    // layout & buttons
                     layout='stacked-reverse'
                     showSkipControls={true}
                     showJumpControls={false}
@@ -72,7 +96,7 @@ const MusicPlayerContainer = ({ playerRef, className }) => {
                         RHAP_UI.LOOP
                     ]}
                     customIcons={customIcons}
-                    autoPlayAfterSrcChange={false}
+                    autoPlayAfterSrcChange={true}
                     customVolumeControls={[]}
                 />
             </div>
@@ -82,14 +106,14 @@ const MusicPlayerContainer = ({ playerRef, className }) => {
 
 const CustomAudioPlayer = React.forwardRef((props, ref) => {
     return (
-        <div>
+        <div className={MusicPlayerCSS.customAudioPlayer}>
+            <div className={MusicPlayerCSS.detailsContainer}>
+                <p>song/artist</p>
+            </div>
             <AudioPlayer {...props} ref={ref} />
-            {/* <div>
-                    <p>test</p>
-                </div> */}
-            {/* make container of audioplayer and these items
-                into a flexbox? similar to navbar and have song/artist on left,
-                and volume on right, use Advanced Usage section on github*/}
+            <div className={MusicPlayerCSS.volumeContainer}>
+                <p>volume</p>
+            </div>
         </div>
     )
 })
