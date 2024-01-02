@@ -1,5 +1,5 @@
 .playlistBody {
-   max-width: 120rem;
+   max-width: 70rem;
    margin-inline: auto;
    padding-top: calc(var(--headerheight) + 1.6rem);
 }
@@ -17,7 +17,7 @@
 .imageContainer {
    border-radius: 1.4rem;
    aspect-ratio: 1/1;
-   width: 10%;
+   width: 10rem;
    min-width: 6.6rem;
    margin-left: 1rem;
 }

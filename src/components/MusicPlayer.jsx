@@ -42,24 +42,28 @@ const MusicPlayer = () => {
 }
 
 const MusicPlayerContainer = ({ playerRef, className }) => {
-    // shuffle functionality for the future when playlist added
+    // shuffle functionality for the future
     const onClick = () => {
         console.log("shuffle clicked");
     }
 
     const [currentTrack, setTrackIndex] = useState(0)
+
+    // next button
     const handleClickNext = () => {
         setTrackIndex((currentTrack) =>
             currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
         )
     }
 
+    // prev button
     const handleClickPrev = () => {
         setTrackIndex((currentTrack) =>
             currentTrack > 0 ? currentTrack - 1 : musicData.length - 1
         )
     }
 
+    // track update for song end
     const handleEnd = () => {
         setTrackIndex((currentTrack) =>
             currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
