@@ -54,29 +54,6 @@ const MusicPlayerContainer = ({ playerRef, className, currentTrack, dispatch }) 
         console.log("shuffle clicked");
     }
 
-    // const [currentTrack, setTrackIndex] = useState(0)
-
-    // next button
-    // const handleClickNext = () => {
-    //     setTrackIndex((currentTrack) =>
-    //         currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
-    //     )
-    // }
-
-    // // prev button
-    // const handleClickPrev = () => {
-    //     setTrackIndex((currentTrack) =>
-    //         currentTrack > 0 ? currentTrack - 1 : musicData.length - 1
-    //     )
-    // }
-
-    // // track update for song end
-    // const handleEnd = () => {
-    //     setTrackIndex((currentTrack) =>
-    //         currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
-    //     )
-    // }
-
     // next button
     const handleClickNext = () => {
         dispatch(setCurrentTrack(currentTrack < musicData.length - 1 ? currentTrack + 1 : 0))

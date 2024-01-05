@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux"
 import MusicCSS from "./../assets/css/Music.module.css"
 import { musicData } from "./data/musicData"
+import { setCurrentTrack } from "../redux/musicPlayerSlice"
 
 const Music = () => {
    return (
@@ -12,17 +14,24 @@ const Music = () => {
 }
 
 const PlaylistItemMap = () => {
-   return musicData.map((song) => {
+   return musicData.map((song, index) => {
       return <PlaylistItem
          key={song.src}
          song={song}
+         index={index}
       />
    })
 }
 
-const PlaylistItem = ({ song }) => {
+const PlaylistItem = ({ song, index }) => {
+   const dispatch = useDispatch();
+
+   const handleItemClick = () => {
+      dispatch(setCurrentTrack(index));
+   }
+
    return (
-      <div className={MusicCSS.playlistItem}>
+      <div className={MusicCSS.playlistItem} onClick={handleItemClick}>
          <div className={MusicCSS.imageContainer}>
             <img
                className={MusicCSS.image}
