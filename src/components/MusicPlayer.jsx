@@ -1,11 +1,16 @@
 import React, { useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import MusicPlayerCSS from "./../assets/css/MusicPlayer.module.css"
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player"
 import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton, MinimizeIcon } from "../assets/svgs/PlayerCustomIcons.jsx"
 import { musicData } from "../pages/data/musicData.jsx"
+import { setCurrentTrack } from "../redux/musicPlayerSlice.jsx"
 
 const MusicPlayer = () => {
+    const dispatch = useDispatch();
+    const currentTrack = useSelector(state => state.musicPlayer.currentTrack);
+
     // ignore for now will be used in volume controls; reference to audio file
     // i.e. playerRef.current.audio.current.play();
     const playerRef = useRef();
@@ -35,39 +40,56 @@ const MusicPlayer = () => {
                 <MusicPlayerContainer
                     playerRef={playerRef}
                     className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`}
+                    currentTrack={currentTrack}
+                    dispatch={dispatch}
                 />
             </div>
         </div>
     )
 }
 
-const MusicPlayerContainer = ({ playerRef, className }) => {
+const MusicPlayerContainer = ({ playerRef, className, currentTrack, dispatch }) => {
     // shuffle functionality for the future
     const onClick = () => {
         console.log("shuffle clicked");
     }
 
-    const [currentTrack, setTrackIndex] = useState(0)
+    // const [currentTrack, setTrackIndex] = useState(0)
+
+    // next button
+    // const handleClickNext = () => {
+    //     setTrackIndex((currentTrack) =>
+    //         currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
+    //     )
+    // }
+
+    // // prev button
+    // const handleClickPrev = () => {
+    //     setTrackIndex((currentTrack) =>
+    //         currentTrack > 0 ? currentTrack - 1 : musicData.length - 1
+    //     )
+    // }
+
+    // // track update for song end
+    // const handleEnd = () => {
+    //     setTrackIndex((currentTrack) =>
+    //         currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
+    //     )
+    // }
 
     // next button
     const handleClickNext = () => {
-        setTrackIndex((currentTrack) =>
-            currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
-        )
+        dispatch(setCurrentTrack(currentTrack < musicData.length - 1 ? currentTrack + 1 : 0))
     }
 
     // prev button
     const handleClickPrev = () => {
-        setTrackIndex((currentTrack) =>
-            currentTrack > 0 ? currentTrack - 1 : musicData.length - 1
-        )
+        dispatch(setCurrentTrack(currentTrack > 0 ? currentTrack - 1 : musicData.length - 1))
     }
 
     // track update for song end
     const handleEnd = () => {
-        setTrackIndex((currentTrack) =>
-            currentTrack < musicData.length - 1 ? currentTrack + 1 : 0
-        )
+        dispatch(setCurrentTrack(currentTrack < musicData.length - 1 ? currentTrack + 1 : 0))
     }
 
     // music player

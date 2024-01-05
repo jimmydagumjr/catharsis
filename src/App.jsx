@@ -25,7 +25,7 @@ const RoutesWithAnimation = () => {
       <Routes location={location} key={location.key}>
         <Route path="/music" element={<Page pageKey="music"><Music /></Page>} />
         <Route path="/gallery" element={<Page pageKey="gallery"><Gallery /></Page>} />
-        <Route path="/cathartic" element={<Page pageKey="cathartic"><Cathartic /></Page>} />
+        <Route path="/" element={<Page pageKey="cathartic"><Cathartic /></Page>} />
       </Routes>
     </AnimatePresence>
   )
