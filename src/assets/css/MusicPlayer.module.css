@@ -89,3 +89,29 @@ input[type="reset"] {
         display: none; /* Hide the containers in portrait mode */
     }
 }
+
+.audioPlayer {
+    flex: 100;
+}
+
+.detailsContainer {
+    flex: 20;
+    overflow-x: hidden;
+    width: 0;
+}
+
+.volumeContainer {
+    flex: 20;
+}
+
+.title {
+    font-size: 1.4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.artist {
+    font-family: "Courier";
+    color: var(--gray);
+}

@@ -6,6 +6,7 @@ import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton, MinimizeIcon } from "../assets/svgs/PlayerCustomIcons.jsx"
 import { musicData } from "../pages/data/musicData.jsx"
 import { setCurrentTrack } from "../redux/musicPlayerSlice.jsx"
+import { motion } from "framer-motion"
 
 const MusicPlayer = () => {
     const dispatch = useDispatch();
@@ -76,6 +77,8 @@ const MusicPlayerContainer = ({ playerRef, className, currentTrack, dispatch }) 
                 <CustomAudioPlayer
                     ref={playerRef}
                     src={musicData[currentTrack].src}
+                    currentTitle={musicData[currentTrack].title}
+                    currentArtist={musicData[currentTrack].artist}
                     onClickNext={handleClickNext}
                     onClickPrevious={handleClickPrev}
                     onEnded={handleEnd}
@@ -107,13 +110,18 @@ const MusicPlayerContainer = ({ playerRef, className, currentTrack, dispatch }) 
     )
 }
 
-const CustomAudioPlayer = React.forwardRef((props, ref) => {
+const CustomAudioPlayer = React.forwardRef(({ currentTitle, currentArtist, ...props }, ref) => {
     return (
         <div className={MusicPlayerCSS.customAudioPlayer}>
             <div className={MusicPlayerCSS.detailsContainer}>
-                <p>song/artist</p>
+                <h2 className={MusicPlayerCSS.title}>
+                    {currentTitle}
+                </h2>
+                <p className={MusicPlayerCSS.artist}>
+                    {currentArtist}
+                </p>
             </div>
-            <AudioPlayer {...props} ref={ref} />
+            <AudioPlayer {...props} ref={ref} className={MusicPlayerCSS.audioPlayer} />
             <div className={MusicPlayerCSS.volumeContainer}>
                 <p>volume</p>
             </div>
