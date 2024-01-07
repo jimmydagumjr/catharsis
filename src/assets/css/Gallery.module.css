@@ -62,12 +62,31 @@ picture {
     padding: 1rem 1.6rem;
     text-align: left;
     align-self: end;
+    display: flex;
+    width: 100%;
+}
+
+.card__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.card__locationContainer {
+    width: 100%;
 }
 
 .card__location {
     font-size: 1.4rem;
     font-weight: 450;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card__time {

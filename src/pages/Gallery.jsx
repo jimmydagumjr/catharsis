@@ -62,8 +62,16 @@ const GalleryCard = ({ photo, formattedTime }) => {
             />
          </div>
          <div className={GalleryCSS.card__details}>
-            <h2 className={GalleryCSS.card__location}>{photo.location}</h2>
-            <p className={GalleryCSS.card__time}>{formattedTime}</p>
+            <div className={GalleryCSS.card__wrapper}>
+               <div className={GalleryCSS.card__locationContainer}>
+                  <h2 className={GalleryCSS.card__location}>
+                     {photo.location}
+                  </h2>
+               </div>
+               <p className={GalleryCSS.card__time}>
+                  {formattedTime}
+               </p>
+            </div>
          </div>
       </motion.div>
    )
