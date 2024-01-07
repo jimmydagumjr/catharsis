@@ -1,5 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import Page from "./components/PageAnimations"
 import MusicPlayer from "./components/MusicPlayer"
@@ -9,22 +8,11 @@ import Gallery from "./pages/Gallery"
 import Catharsis from "./pages/Catharsis"
 
 function App() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  // redirect to /music on initial load
-  useEffect(() => {
-    if (location.pathname !== "/music") {
-      navigate("/music");
-    }
-  }, []);
-
   return <>
     <Navbar />
     <RoutesWithAnimation />
     <MusicPlayer />
   </>
-
 }
 
 const RoutesWithAnimation = () => {
