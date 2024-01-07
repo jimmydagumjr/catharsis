@@ -2,12 +2,22 @@ import Navbar from "./components/Navbar"
 import Music from "./pages/Music"
 import Gallery from "./pages/Gallery"
 import Cathartic from "./pages/Cathartic"
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
 import Page from "./components/PageAnimations"
 import MusicPlayer from "./components/MusicPlayer"
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // redirect to /music on initial load
+  useEffect(() => {
+    if (location.pathname !== "/music") {
+      navigate("/music");
+    }
+  }, []);
 
   return <>
     <Navbar />
