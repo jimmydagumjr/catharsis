@@ -10,7 +10,6 @@ import { setCurrentTrack } from "../redux/musicPlayerSlice.jsx"
 const MusicPlayer = () => {
     const dispatch = useDispatch();
     const currentTrack = useSelector(state => state.musicPlayer.currentTrack);
-
     const playerRef = useRef();
     const [isMinimized, setMinimized] = useState(false);
     // currently not in use; for fill transitions etc. in css file
@@ -19,29 +18,35 @@ const MusicPlayer = () => {
     const handleToggleMinimize = () => {
         setMinimized(!isMinimized);
     }
+
     return (
-        <div>
-            <div className={MusicPlayerCSS.minButtonContainer}
-                style={{ bottom: isMinimized ? '1.4rem' : '10.2rem' }}
+        <>
+            <MinimizeContainer isMinimized={isMinimized} handleToggleMinimize={handleToggleMinimize} />
+            <MusicPlayerContainer
+                playerRef={playerRef}
+                className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`}
+                currentTrack={currentTrack}
+                dispatch={dispatch}
+            />
+        </>
+    )
+}
+
+const MinimizeContainer = ({ isMinimized, handleToggleMinimize }) => {
+
+    return (
+        <div className={MusicPlayerCSS.minButtonContainer}
+            style={{ bottom: isMinimized ? '1.4rem' : '10.2rem' }}
+        >
+            <button
+                className={MusicPlayerCSS.minButton}
+                onClick={handleToggleMinimize}
             >
-                <button
-                    className={MusicPlayerCSS.minButton}
-                    onClick={handleToggleMinimize}
-                >
-                    <MinimizeIcon
-                        isMinimized={isMinimized}
-                    // iconClass={`${MusicPlayerCSS.minimizeIcon} ${iconClass}`}
-                    />
-                </button>
-            </div>
-            <div>
-                <MusicPlayerContainer
-                    playerRef={playerRef}
-                    className={`${MusicPlayerCSS.playerContainer} ${isMinimized ? MusicPlayerCSS.minimized : ''}`}
-                    currentTrack={currentTrack}
-                    dispatch={dispatch}
+                <MinimizeIcon
+                    isMinimized={isMinimized}
+                // iconClass={`${MusicPlayerCSS.minimizeIcon} ${iconClass}`}
                 />
-            </div>
+            </button>
         </div>
     )
 }
@@ -163,7 +168,7 @@ const AudioVolume = (({ audioRef }) => {
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="64 0 512 512">
                 <path d={!isMuted ? volumeIconPaths.unmuted : volumeIconPaths.muted} />
             </svg>
-            
+
         )
     }
 

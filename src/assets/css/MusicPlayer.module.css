@@ -48,11 +48,11 @@
 }
 
 .minButton svg {
-    color: var(--black);
+    fill: var(--darkgray);
 }
 
 .minButton svg:hover {
-    fill: var(--darkgray);
+    fill: var(--gray);
     transition: 0.3s;
 }
 

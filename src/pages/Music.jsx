@@ -60,12 +60,10 @@ const PlaylistItem = ({ song, index }) => {
             once: true
          }}
          transition={{
-            type: "spring",
-            mass: 0.1,
-            damping: 1,
-            stiffness: 5,
-            restDelta: 0.001
-         }}
+            type: "tween",
+            ease: "easeOut",
+            duration: 0.3,
+          }}
       >
          <div className={MusicCSS.imageContainer}>
             <img
