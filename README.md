@@ -1,11 +1,10 @@
 # catharsis
-cathartic website ported to react
+***ca·thar·sis** - the process of releasing, and thereby providing relief from, strong or repressed emotions.*
 
-# React + Vite
+![catharsis picture](https://rarebooksparis.com/cdn/shop/products/19_Pagina_5_2560x.jpg?v=1663418673)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website consists of a music player, playlist, and gallery. Its intent is to express myself through another medium that connects music and photography.
 
-Currently, two official plugins are available:
+The web application itself is completely dynamic and works on both mobile and desktop.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Catharsis is an ongoing project.
