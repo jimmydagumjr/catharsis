@@ -3,17 +3,6 @@ import GalleryCSS from "./../assets/css/Gallery.module.css"
 import { galleryData } from './data/galleryData.jsx'
 import { motion } from "framer-motion"
 
-const cardVariants = {
-   hidden: {
-      opacity: 0,
-      y: 100
-   },
-   visible: {
-      opacity: 1,
-      y: 0
-   }
-}
-
 const Gallery = () => {
    return (
       <div className={GalleryCSS.photoBody}>
@@ -36,6 +25,17 @@ const GalleryCardMap = () => {
       />
    }
    )
+}
+
+const cardVariants = {
+   hidden: {
+      opacity: 0,
+      y: 100
+   },
+   visible: {
+      opacity: 1,
+      y: 0
+   }
 }
 
 const GalleryCard = ({ photo, formattedTime }) => {

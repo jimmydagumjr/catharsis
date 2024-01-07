@@ -1,0 +1,6 @@
+.catharsisBody {
+   padding-top: calc(var(--headerheight) + 1.6rem);
+   padding-bottom: 10.2rem;
+   margin-inline: auto;
+   max-width: 70rem;
+}
