@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import MusicCSS from "./../assets/css/Music.module.css"
 import { musicData } from "./data/musicData"
 import { setCurrentTrack } from "../redux/musicPlayerSlice"
+import { motion } from "framer-motion"
 
 const Music = () => {
    return (
@@ -23,6 +24,17 @@ const PlaylistItemMap = () => {
    })
 }
 
+const playlistVariants = {
+   hidden: {
+      opacity: 0,
+      y: 100
+   },
+   visible: {
+      opacity: 1,
+      y: 0
+   }
+}
+
 const PlaylistItem = ({ song, index }) => {
    const dispatch = useDispatch();
 
@@ -37,7 +49,24 @@ const PlaylistItem = ({ song, index }) => {
       : MusicCSS.detailsContainer;
 
    return (
-      <div className={MusicCSS.playlistItem} onClick={handleItemClick}>
+      <motion.div
+         className={MusicCSS.playlistItem}
+         onClick={handleItemClick}
+         // whileTap = {{ x: 10, transition: { duration: 0.01 } }}
+         variants={playlistVariants}
+         initial="hidden"
+         whileInView="visible"
+         viewport={{
+            once: true
+         }}
+         transition={{
+            type: "spring",
+            mass: 0.1,
+            damping: 1,
+            stiffness: 5,
+            restDelta: 0.001
+         }}
+      >
          <div className={MusicCSS.imageContainer}>
             <img
                className={MusicCSS.image}
@@ -53,7 +82,7 @@ const PlaylistItem = ({ song, index }) => {
                {song.artist}
             </p>
          </div>
-      </div>
+      </motion.div>
    )
 }
 
