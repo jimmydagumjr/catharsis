@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import GalleryCSS from "./../assets/css/Gallery.module.css"
 import { galleryData } from './data/galleryData.jsx'
 import { motion } from "framer-motion"
@@ -26,11 +27,8 @@ const Gallery = () => {
 const GalleryCardMap = () => {
    return galleryData.map((photo) => {
       // time formatting
-      const formattedTime = photo.time.toLocaleDateString(undefined, {
-         year: "numeric",
-         month: "long",
-         day: "numeric"
-      })
+      const formattedTime = formatTime(photo.time, isSmallScreen());
+
       return <GalleryCard
          key={photo.src}
          photo={photo}
@@ -54,7 +52,7 @@ const GalleryCard = ({ photo, formattedTime }) => {
             type: "tween",
             ease: "easeOut",
             duration: 0.3,
-          }}
+         }}
       >
          <div className={GalleryCSS.card__imgContainer}>
             <img
@@ -69,6 +67,65 @@ const GalleryCard = ({ photo, formattedTime }) => {
          </div>
       </motion.div>
    )
+}
+
+const useWindowSize = () => {
+   const [windowSize, setWindowSize] = useState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+   })
+
+   useEffect(() => {
+      const handleResize = debounce(() => {
+         setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+         });
+      }, 300)
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+         window.removeEventListener('resize', handleResize);
+      };
+   }, [])
+
+   return windowSize;
+}
+
+const debounce = (func, delay) => {
+   let timer;
+   return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+         func.apply(this, arguments);
+      }, delay);
+   }
+}
+
+const getWindowWidth = () => {
+   return useWindowSize().width;
+}
+
+const isSmallScreen = () => {
+   const width = getWindowWidth();
+   return width <= 768;
+}
+
+const formatTime = (time, isSmallScreen) => {
+   if (isSmallScreen) {
+      return time.toLocaleDateString(undefined, {
+         year: "numeric",
+         month: "numeric",
+         day: "numeric"
+      })
+   } else {
+      return time.toLocaleDateString(undefined, {
+         year: "numeric",
+         month: "long",
+         day: "numeric"
+      })
+   }
 }
 
 export default Gallery

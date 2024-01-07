@@ -11,6 +11,27 @@
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
+/* Media query for small screens */
+@media (max-width: 767px) {
+    .photoContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Media query for medium screens */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .photoContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 1024px) {
+    .photoContainer {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 .card {
     padding: 1rem;
 }
