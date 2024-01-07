@@ -2,6 +2,7 @@
    max-width: 70rem;
    margin-inline: auto;
    padding-top: calc(var(--headerheight) + 1.6rem);
+   padding-bottom: 10.2rem;
 }
 
 .playlistContainer {
@@ -56,4 +57,8 @@
    font-size: 1.2rem;
    color: var(--gray);
    margin-top: 0.2rem;
+}
+
+.active {
+   background-color: var(--reallylightgray);
 }

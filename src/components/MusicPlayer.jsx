@@ -6,7 +6,6 @@ import './../assets/css/AudioPlayer.scss'
 import customIcons, { ShuffleButton, MinimizeIcon } from "../assets/svgs/PlayerCustomIcons.jsx"
 import { musicData } from "../pages/data/musicData.jsx"
 import { setCurrentTrack } from "../redux/musicPlayerSlice.jsx"
-import { motion } from "framer-motion"
 
 const MusicPlayer = () => {
     const dispatch = useDispatch();

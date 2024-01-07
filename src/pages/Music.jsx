@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import MusicCSS from "./../assets/css/Music.module.css"
 import { musicData } from "./data/musicData"
 import { setCurrentTrack } from "../redux/musicPlayerSlice"
@@ -30,6 +30,12 @@ const PlaylistItem = ({ song, index }) => {
       dispatch(setCurrentTrack(index));
    }
 
+   const currentTrack = useSelector(state => state.musicPlayer.currentTrack);
+
+   const detailsContainerClassName = currentTrack === index
+      ? `${MusicCSS.detailsContainer} ${MusicCSS.active}`
+      : MusicCSS.detailsContainer;
+
    return (
       <div className={MusicCSS.playlistItem} onClick={handleItemClick}>
          <div className={MusicCSS.imageContainer}>
@@ -39,7 +45,7 @@ const PlaylistItem = ({ song, index }) => {
                loading="lazy"
             />
          </div>
-         <div className={MusicCSS.detailsContainer}>
+         <div className={detailsContainerClassName}>
             <h2 className={MusicCSS.title}>
                {song.title}
             </h2>

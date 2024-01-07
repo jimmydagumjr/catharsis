@@ -2,6 +2,7 @@
     max-width: 120rem;
     margin-inline: auto;
     padding-top: calc(var(--headerheight) + 1.6rem);
+    padding-bottom: 10.2rem;
     overflow: clip;
 }
 
@@ -45,10 +46,12 @@ picture {
 .card__location {
     font-size: 1.4rem;
     font-weight: 450;
+    margin: 0;
 }
 
 .card__time {
     font-family: "Courier";
     font-size: 1.2rem;
     color: var(--gray);
+    margin: 0;
 }
