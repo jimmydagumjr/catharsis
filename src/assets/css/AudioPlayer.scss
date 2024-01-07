@@ -24,7 +24,7 @@ $rhap_font-family: "Courier" !default;
   }
   svg:hover {
     fill: var(--darkgray);
-    transition: .3s;
+    transition: 0.3s;
   }
 }
 
@@ -140,7 +140,7 @@ $rhap_font-family: "Courier" !default;
   width: 1rem;
   height: 1rem;
   margin-left: -1rem;
-  top: -.3rem;
+  top: -0.3rem;
   background: $rhap_theme-color;
   border-radius: 50px;
   // box-shadow: rgba($rhap_theme-color, .5) 0 0 5px;
@@ -187,7 +187,6 @@ $rhap_font-family: "Courier" !default;
   font-size: 3.6rem;
   width: 3.6rem;
   height: 3.6rem;
-  
 }
 
 .rhap_volume-controls {
@@ -238,8 +237,8 @@ $rhap_font-family: "Courier" !default;
 .rhap_volume-indicator {
   box-sizing: border-box;
   position: absolute;
-  width: .8rem;
-  height: .8rem;
+  width: 0.8rem;
+  height: 0.8rem;
   margin-left: -6px;
   left: 0;
   top: -2px;
@@ -250,7 +249,7 @@ $rhap_font-family: "Courier" !default;
   cursor: pointer;
 
   &:hover {
-    opacity: .9;
+    opacity: 0.9;
   }
 }
 
@@ -271,12 +270,12 @@ $rhap_font-family: "Courier" !default;
   cursor: pointer;
 
   &:hover {
-    opacity: .9;
-    transition-duration: .2s;
+    opacity: 0.9;
+    transition-duration: 0.2s;
   }
 
   &:active {
-    opacity: .95;
+    opacity: 0.95;
   }
 
   &:focus:not(:focus-visible) {

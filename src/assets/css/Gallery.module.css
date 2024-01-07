@@ -1,97 +1,97 @@
 .photoBody {
-    max-width: 120rem;
-    margin-inline: auto;
-    padding-top: calc(var(--headerheight) + 1.6rem);
-    padding-bottom: 10.2rem;
-    overflow: clip;
+  max-width: 120rem;
+  margin-inline: auto;
+  padding-top: calc(var(--headerheight) + 1.6rem);
+  padding-bottom: 10.2rem;
+  overflow: clip;
 }
 
 .photoContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
 /* Media query for small screens */
 @media (max-width: 767px) {
-    .photoContainer {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .photoContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Media query for medium screens */
 @media (min-width: 768px) and (max-width: 1023px) {
-    .photoContainer {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .photoContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Media query for larger screens */
 @media (min-width: 1024px) {
-    .photoContainer {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  .photoContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .card {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 img,
 picture {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
 .card__imgContainer {
-    border-radius: 1.4rem;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: clip;
-    margin-bottom: 1rem;
+  border-radius: 1.4rem;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: clip;
+  margin-bottom: 1rem;
 }
 
 .card__img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .card__details {
-    background-color: var(--white);
-    border-radius: 1.4rem;
-    padding: 1rem 1.6rem;
-    text-align: left;
-    align-self: end;
-    display: flex;
-    width: 100%;
+  background-color: var(--white);
+  border-radius: 1.4rem;
+  padding: 1rem 1.6rem;
+  text-align: left;
+  align-self: end;
+  display: flex;
+  width: 100%;
 }
 
 .card__wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 0;
-    flex: 1;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .card__locationContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .card__location {
-    font-size: 1.4rem;
-    font-weight: 450;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-size: 1.4rem;
+  font-weight: 450;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card__time {
-    font-family: "Courier";
-    font-size: 1.2rem;
-    color: var(--gray);
-    margin: 0;
+  font-family: "Courier";
+  font-size: 1.2rem;
+  color: var(--gray);
+  margin: 0;
 }

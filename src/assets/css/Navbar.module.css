@@ -1,76 +1,77 @@
 .nav {
-    height: var(--headerheight);
-    position: fixed;
-    border-radius: 1rem;
-    top: 0;
-    z-index: 1100;
-    padding: 1.6rem 1.6rem 0;
-    width: 100%;
+  height: var(--headerheight);
+  position: fixed;
+  border-radius: 1rem;
+  top: 0;
+  z-index: 1100;
+  padding: 1.6rem 1.6rem 0;
+  width: 100%;
 }
 
 .navContainer {
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .navFilter {
-    height: 5.6rem;
-    border-radius: 1.6rem;
+  height: 5.6rem;
+  border-radius: 1.6rem;
 }
 
 @supports (height: 100dvh) {
-    .navFilter {
-        max-height: calc(100dvh - 3.2rem);
-    }
+  .navFilter {
+    max-height: calc(100dvh - 3.2rem);
+  }
 }
 
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    .navFilter {
-        backdrop-filter: blur(135px);
-        background-color: rgba(247, 247, 242, .24);
-    }
+  .navFilter {
+    backdrop-filter: blur(135px);
+    background-color: rgba(247, 247, 242, 0.24);
+  }
 }
 
 .navPrimaryContainer {
-    max-height: calc(100vh - 3.2rem);
+  max-height: calc(100vh - 3.2rem);
 }
 
 @supports (height: 100dvh) {
-    .navPrimaryContainer {
-        max-height: calc(100dvh - 3.2rem);
-    }
+  .navPrimaryContainer {
+    max-height: calc(100dvh - 3.2rem);
+  }
 }
 
 .navPrimary {
-    width: 100%;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    align-items: center;
-    height: 5.6rem;
-    padding: 0 2.2rem 0 2.2rem;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  align-items: center;
+  height: 5.6rem;
+  padding: 0 2.2rem 0 2.2rem;
 }
 
-.navLeft, .navRight {
-    flex: 100;
+.navLeft,
+.navRight {
+  flex: 100;
 }
 
 .navLeft {
-    text-align: left;
+  text-align: left;
 }
 
 .navRight {
-    text-align: right;
+  text-align: right;
 }
 
 .logo {
-    width: 2.2rem;
-    height: 2.2em;
-    overflow: clip;
-    flex-grow: 1;
-    text-align: center;
-    transition: 1s;
+  width: 2.2rem;
+  height: 2.2em;
+  overflow: clip;
+  flex-grow: 1;
+  text-align: center;
+  transition: 1s;
 }
 
 /* .cathartic:hover {
@@ -78,13 +79,13 @@
 } */
 
 .logo svg {
-    fill: var(--black);
+  fill: var(--black);
 }
 
 .nav a {
-    font-size: 1.4rem;
-    text-decoration: none;
-    color: var(--black);
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: var(--black);
 }
 
 /* .nav a:hover {

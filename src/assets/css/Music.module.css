@@ -1,102 +1,102 @@
 .playlistBody {
-   max-width: 70rem;
-   margin-inline: auto;
-   padding-top: calc(var(--headerheight) + 1.6rem);
-   padding-bottom: 10.2rem;
-   overflow-x: clip;
+  max-width: 70rem;
+  margin-inline: auto;
+  padding-top: calc(var(--headerheight) + 1.6rem);
+  padding-bottom: 10.2rem;
+  overflow-x: clip;
 }
 
 .playlistContainer {
-   display: grid;
-   gap: 1rem;
-   grid-template-columns: 1fr;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
 }
 
 .playlistItem {
-   display: flex;
-   max-width: 100%;
+  display: flex;
+  max-width: 100%;
 }
 
 .playlistItem:hover {
-   cursor: pointer;
+  cursor: pointer;
 }
 
 .imageContainer {
-   border-radius: 1.4rem;
-   aspect-ratio: 1/1;
-   width: 10rem;
-   min-width: 6.6rem;
-   margin-left: 1rem;
+  border-radius: 1.4rem;
+  aspect-ratio: 1/1;
+  width: 10rem;
+  min-width: 6.6rem;
+  margin-left: 1rem;
 }
 
 .image {
-   aspect-ratio: 1/1;
-   border-radius: 1.4rem;
+  aspect-ratio: 1/1;
+  border-radius: 1.4rem;
 }
 
 .detailsContainer {
-   background-color: var(--white);
-   border-radius: 1.4rem;
-   margin-left: 1rem;
-   margin-right: 1rem;
-   width: 100%;
-   min-height: 6.6rem;
-   padding-left: 2rem;
-   padding-right: 2rem;
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
+  background-color: var(--white);
+  border-radius: 1.4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 100%;
+  min-height: 6.6rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .titleContainer {
-   width: 100%;
+  width: 100%;
 }
 
 .title {
-   font-size: 1.4rem;
-   font-weight: 450;
-   margin-bottom: 0.2rem;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: nowrap;
+  font-size: 1.4rem;
+  font-weight: 450;
+  margin-bottom: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .artistContainer {
-   width: 100%;
+  width: 100%;
 }
 
 .artist {
-   font-family: "Courier";
-   font-size: 1.2rem;
-   color: var(--gray);
-   margin-top: 0.2rem;
-   text-overflow: ellipsis;
-   overflow: hidden;
-   white-space: nowrap;
+  font-family: "Courier";
+  font-size: 1.2rem;
+  color: var(--gray);
+  margin-top: 0.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .active {
-   background-color: var(--reallylightgray);
+  background-color: var(--reallylightgray);
 }
 
 .infoContainer {
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   justify-content: center;
-   width: 0;
-   flex: 1;
-   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .spotify {
-   margin-left: 1rem;
-   min-width: none;
-   width: auto;
+  margin-left: 1rem;
+  min-width: none;
+  width: auto;
 }
 
 .urlButton {
-   width: 2rem;
-   height: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
