@@ -3,6 +3,7 @@
    margin-inline: auto;
    padding-top: calc(var(--headerheight) + 1.6rem);
    padding-bottom: 10.2rem;
+   overflow-x: clip;
 }
 
 .playlistContainer {
@@ -13,6 +14,7 @@
 
 .playlistItem {
    display: flex;
+   max-width: 100%;
 }
 
 .playlistItem:hover {
@@ -39,17 +41,29 @@
    margin-right: 1rem;
    width: 100%;
    min-height: 6.6rem;
-   padding-left: 1rem;
+   padding-left: 2rem;
+   padding-right: 2rem;
    display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   justify-content: center;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.titleContainer {
+   width: 100%;
 }
 
 .title {
    font-size: 1.4rem;
    font-weight: 450;
    margin-bottom: 0.2rem;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.artistContainer {
+   width: 100%;
 }
 
 .artist {
@@ -57,8 +71,32 @@
    font-size: 1.2rem;
    color: var(--gray);
    margin-top: 0.2rem;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
 }
 
 .active {
    background-color: var(--reallylightgray);
+}
+
+.infoContainer {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: center;
+   width: 0;
+   flex: 1;
+   overflow: hidden;
+}
+
+.spotify {
+   margin-left: 1rem;
+   min-width: none;
+   width: auto;
+}
+
+.urlButton {
+   width: 2rem;
+   height: 2rem;
 }
