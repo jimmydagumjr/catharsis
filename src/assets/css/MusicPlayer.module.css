@@ -57,7 +57,8 @@
 }
 
 .minimizeIcon path {
-    transition: 0.2s ease; /* Add a transition for the 'd' attribute */
+    transition: 0.2s ease;
+    /* Add a transition for the 'd' attribute */
 }
 
 button,
@@ -84,9 +85,11 @@ input[type="reset"] {
 }
 
 @media (orientation: portrait) {
+
     .detailsContainer,
     .volumeContainer {
-        display: none; /* Hide the containers in portrait mode */
+        display: none !important;
+        /* Hide the containers in portrait mode */
     }
 }
 
@@ -104,6 +107,19 @@ input[type="reset"] {
 .volumeContainer {
     flex: 20;
     padding-right: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.volumeWrapper {
+    white-space: nowrap;
+    max-width: 14rem;
+    padding-right: 2.2rem;
+}
+
+.volumeButton {
+    height: 2.2rem;
 }
 
 .title {
@@ -111,11 +127,76 @@ input[type="reset"] {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.4rem;
 }
 
 .artist {
     font-family: "Courier";
-    color: var(--gray);
-    margin-top: 0.8rem;
+    color: var(--darkgray);
+    margin-top: 0.4rem;
+}
+
+.volumeInput {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    background-color: var(--gray);
+    border-radius: 1.4rem;
+    height: 0.4rem;
+}
+
+.volumeInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -3px;
+    background-color: var(--black);
+    height: 1rem;
+    width: 1rem;
+    border-radius: 10rem;
+}
+
+.volumeInput::-moz-range-thumb {
+    border: none;
+    border-radius: 0;
+    background-color: var(--black);
+    height: 1rem;
+    width: 1rem;
+    border-radius: 10rem;
+}
+
+.volumeInput::-moz-range-progress {
+    background-color: var(--black);
+    height: 100%;
+    border: none;
+    border-radius: 1.4rem;
+}
+
+.volumeInput::-moz-range-track {
+    background-color: var(--gray);
+    height: 100%;
+    border: none;
+    border-radius: 1.4rem;
+}
+
+.volumeInput::-webkit-slider-runnable-track {
+    background-color: var(--gray);
+    height: 100%;
+    border: none;
+    border-radius: 1.4rem;
+}
+
+/* these progress bar values don't work idk why */
+.volumeInput::-webkit-progress-value {
+    background-color: var(--black);
+}
+
+.volumeInput::-webkit-progress-bar {
+    background-color: var(--black);
+}
+
+.volumeInput::-ms-fill-lower,
+.volumeInput::-ms-fill-upper {
+    background-color: var(--black);
 }
