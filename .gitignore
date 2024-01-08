@@ -25,3 +25,8 @@ dist-ssr
 
 # user directories & files
 /src/pages/data/photos/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

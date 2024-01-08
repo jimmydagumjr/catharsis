@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Music from "./pages/Music";
 import Gallery from "./pages/Gallery";
 import Catharsis from "./pages/Catharsis";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -44,6 +45,14 @@ const RoutesWithAnimation = () => {
           element={
             <Page pageKey="catharsis">
               <Catharsis />
+            </Page>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <Page pageKey="admin">
+              <Admin />
             </Page>
           }
         />
