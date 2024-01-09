@@ -7,6 +7,8 @@ import Music from "./pages/Music";
 import Gallery from "./pages/Gallery";
 import Catharsis from "./pages/Catharsis";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+import Upload from "./pages/Upload";
 
 function App() {
   return (
@@ -53,6 +55,22 @@ const RoutesWithAnimation = () => {
           element={
             <Page pageKey="admin">
               <Admin />
+            </Page>
+          }
+        />
+        <Route
+          path="/upload"
+          element={
+            <Page pageKey="upload">
+              <Upload />
+            </Page>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Page pageKey="login">
+              <Login />
             </Page>
           }
         />

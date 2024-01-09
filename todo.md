@@ -18,3 +18,13 @@ BUG WHEN HOVERING NAVBAR MENU NAVBAR IS IN BACKGROUND OR SMTH
 make admin route for uploading data(music/pictures)
 
 add logo flip to line when scrolling down
+
+use login page as redirect when trying to upload, also use as redirect when trying to add like or comment after functionality implemented
+
+remove admin page
+
+upload page should only be accessible to my uid jwt token
+
+create search component for music playlist and gallery
+
+create filter component for gallery
