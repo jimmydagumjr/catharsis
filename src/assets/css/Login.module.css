@@ -1,0 +1,11 @@
+.loginBody {
+    padding-top: calc(var(--headerheight) + 1.6rem);
+    padding-bottom: 10.2rem;
+    margin-inline: auto;
+    max-width: 90rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
