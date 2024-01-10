@@ -96,20 +96,27 @@ const Auth = () => {
               placeholder="password"
             />
           </label>
-          <br />
         </div>
         <div>
-          <button type="button" onClick={signInWithEmail}>
-            Sign In
+          <button
+            className={AuthCSS.signButtons}
+            type="button"
+            onClick={signInWithEmail}
+          >
+            sign in
           </button>
-          <button type="button">Register</button>
+          <button className={AuthCSS.signButtons} type="button">
+            register
+          </button>
         </div>
 
         {/* <button type="button" onClick={changePassword}>
           Change Password
         </button> */}
 
-        <button type="button">forgot password</button>
+        {/* <button className={AuthCSS.pResetButton} type="button">
+          forgot password
+        </button> */}
       </form>
     </div>
   );

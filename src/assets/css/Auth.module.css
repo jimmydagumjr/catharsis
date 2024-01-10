@@ -34,3 +34,22 @@
 .formItem input::placeholder {
     color: var(--gray);
 }
+
+.signButtons {
+    width: 10rem;
+    height: 3rem;
+    /* background-color: var(--white); */
+    font-size: 2rem;
+    font-family: "HelveticaNeue";
+    font-weight: 500;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.8rem;
+    border-radius: 1.4rem;
+}
+
+.pResetButton {
+    font-size: 1rem;
+    color: var(--lightgray);
+    margin-top: 0.6rem;
+}
