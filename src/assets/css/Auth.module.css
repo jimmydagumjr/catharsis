@@ -39,11 +39,10 @@
   color: var(--gray);
 }
 
-.signInButton {
+.submitButtons {
   font-size: 1.8rem;
   font-family: "HelveticaNeue";
   font-weight: 500;
-  margin: 1rem;
   border-radius: 1.4rem;
 }
 
@@ -56,7 +55,6 @@
 .miscButtons {
   font-size: 1rem;
   color: var(--lightgray);
-  margin-top: 0.2rem;
   font-family: "Courier";
 }
 
@@ -68,6 +66,7 @@
   width: 100%;
   text-align: center;
   font-family: "Courier";
+  font-size: 1.1rem;
 }
 
 .loadingContainer {
@@ -78,4 +77,8 @@
   z-index: 999; /* Set a high z-index to make sure it's on top */
   width: 100%;
   text-align: center;
+}
+
+.break {
+    height: 1rem;
 }

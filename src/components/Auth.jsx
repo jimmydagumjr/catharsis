@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSession } from "./../redux/userSessionSlice.jsx";
+import { setSession } from "../redux/sessionSlice.jsx";
 import { supabase } from "./../lib/helper/supaBaseClient.jsx";
 import {
   EmailIcon,
@@ -16,13 +16,15 @@ const Auth = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [redirecting, setRedirecting] = useState(true);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
-  const userSession = useSelector((state) => state.userSession);
+  const session = useSelector((state) => state.session);
 
+  // check if current session already exists(make sure user is signed out)
   useEffect(() => {
     const checkSession = async () => {
       try {
@@ -59,50 +61,104 @@ const Auth = () => {
     return () => subscription.unsubscribe();
   }, [dispatch, navigate]);
 
-  const signInWithEmail = async () => {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      setError(error.message.toLowerCase());
-      setLoading(false);
-      return;
-    }
-  };
-
+  // form redirects
   const redirectToRegister = () => {
-    console.log("register");
+    if (error) setError(null);
     setShowRegisterForm(true);
   };
 
   const redirectToResetPassword = () => {
-    console.log("resetpw");
+    if (error) setError(null);
     setShowForgotPasswordForm(true);
   };
 
-  const signInWithGithub = async () => {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-
-    if (error) {
-      setError(error.message.toLowerCase());
-      setLoading(false);
-      return;
-    }
-    setLoading(false);
+  const redirectToLogin = () => {
+    if (error) setError(null);
+    if (showRegisterForm) setShowRegisterForm(false);
+    if (showForgotPasswordForm) setShowForgotPasswordForm(false);
   };
 
-  useEffect(() => {
-    if (userSession.isAuthenticated) {
-      navigate("/");
-      console.log(userSession.isAuthenticated);
+  // email sign in
+  const signInWithEmail = async () => {
+    try {
+      setLoading(true);
+      const { user, session, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        setError(error.message.toLowerCase());
+        setLoading(false);
+        return;
+      }
+
+      dispatch(setSession(session));
+    } catch (error) {
+      console.error("sign-in error: ", error);
+      setError("failed to sign in");
+      setLoading(false);
     }
-  }, [userSession.isAuthenticated, navigate]);
+  };
+
+  // github sign in
+  const signInWithGithub = async () => {
+    try {
+      setLoading(true);
+      const { user, session, error } = await supabase.auth.signInWithOAuth({
+        provider: "github",
+      });
+
+      if (error) {
+        setError(error.message.toLowerCase());
+        setLoading(false);
+        return;
+      }
+
+      dispatch(setSession(session));
+    } catch (error) {
+      console.error("sign-in error: ", error);
+      setError("failed to sign in");
+      setLoading(false);
+    }
+  };
+
+  // register user
+  const registerUser = async () => {
+    try {
+      setLoading(true);
+
+      if (password !== confirmPassword) {
+        setError("passwords don't match");
+        setLoading(false);
+        return;
+      }
+
+      const { user, session, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        setError(error.message.toLowerCase());
+        setLoading(false);
+        return;
+      }
+
+      dispatch(setSession(session));
+    } catch (error) {
+      console.error("registration error: ", error);
+      setError("failed to register user");
+      setLoading(false);
+    }
+  };
+
+  // redirect if authenticated account
+  useEffect(() => {
+    if (session.isAuthenticated) {
+      navigate("/");
+    }
+  }, [session.isAuthenticated, navigate]);
 
   if (redirecting) {
     return <p>redirecting...</p>;
@@ -111,7 +167,18 @@ const Auth = () => {
   return (
     <div className={AuthCSS.authBody}>
       {showRegisterForm ? (
-        <AuthRegisterForm />
+        <AuthRegisterForm
+          error={error}
+          email={email}
+          password={password}
+          confirmPassword={confirmPassword}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          setConfirmPassword={setConfirmPassword}
+          registerUser={registerUser}
+          redirectToLogin={redirectToLogin}
+          loading={loading}
+        />
       ) : showForgotPasswordForm ? (
         <AuthForgotPasswordForm />
       ) : (
@@ -162,7 +229,7 @@ const AuthLoginForm = ({
             placeholder="email"
           />
         </label>
-        <br />
+        <div className={AuthCSS.break} />
         <label className={AuthCSS.formItem}>
           <PasswordIcon />
           <input
@@ -173,14 +240,15 @@ const AuthLoginForm = ({
           />
         </label>
       </div>
-
+      <div className={AuthCSS.break} />
       <button
-        className={AuthCSS.signInButton}
+        className={AuthCSS.submitButtons}
         type="button"
         onClick={signInWithEmail}
       >
         sign in
       </button>
+      <div className={AuthCSS.break} />
       <button
         className={AuthCSS.miscButtons}
         type="button"
@@ -188,6 +256,7 @@ const AuthLoginForm = ({
       >
         forgot password
       </button>
+      <div style={{ height: "0.2rem" }} />
       <button
         className={AuthCSS.miscButtons}
         type="button"
@@ -202,13 +271,76 @@ const AuthLoginForm = ({
   </>
 );
 
-const AuthRegisterForm = () => (
-  <div>register</div>
+const AuthRegisterForm = ({
+  error,
+  email,
+  password,
+  confirmPassword,
+  setEmail,
+  setPassword,
+  setConfirmPassword,
+  registerUser,
+  redirectToLogin,
+  loading,
+}) => (
+  <>
+    {error && <p className={AuthCSS.error}>{error}</p>}
+    <form className={AuthCSS.formContainer}>
+      <div className={AuthCSS.labelContainer}>
+        <label className={AuthCSS.formItem}>
+          <EmailIcon />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
+          />
+        </label>
+        <div className={AuthCSS.break} />
+        <label className={AuthCSS.formItem}>
+          <PasswordIcon />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
+          />
+        </label>
+        <div className={AuthCSS.break} />
+        <label className={AuthCSS.formItem}>
+          <div style={{ width: "3rem" }} />
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="confirm password"
+          />
+        </label>
+      </div>
+      <div className={AuthCSS.break} />
+      <button
+        className={AuthCSS.submitButtons}
+        type="button"
+        onClick={registerUser}
+      >
+        register
+      </button>
+      <div className={AuthCSS.break} />
+      <button
+        className={AuthCSS.miscButtons}
+        type="button"
+        onClick={redirectToLogin}
+      >
+        back
+      </button>
+      <div className={AuthCSS.loadingContainer}>
+        {loading && <LoadingIcon className={AuthCSS.loading} />}
+      </div>
+    </form>
+  </>
 );
 
-const AuthForgotPasswordForm = () => (
-  <div>forgot password</div>
-);
+const AuthForgotPasswordForm = () => <div>forgot password</div>;
 
 export default Auth;
 

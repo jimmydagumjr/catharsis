@@ -5,8 +5,8 @@ const initialState = {
   isAuthenticated: false,
 };
 
-const userSessionSlice = createSlice({
-  name: "userSession",
+const sessionSlice = createSlice({
+  name: "session",
   initialState,
   reducers: {
     setSession: (state, action) => {
@@ -20,5 +20,5 @@ const userSessionSlice = createSlice({
   },
 });
 
-export const { setSession, clearSession } = userSessionSlice.actions;
-export default userSessionSlice.reducer;
+export const { setSession, clearSession } = sessionSlice.actions;
+export default sessionSlice.reducer;

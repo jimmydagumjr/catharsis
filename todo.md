@@ -53,3 +53,22 @@ for the upload forms, disable component/button clicks when uploading state is tr
 possibly do the same for auth forms^
 
 if no user session from redux store present, and user clicks on either upload, like, or attempts to comment, or live chat functionality in the future(?) and sends a live chat, then send to login page
+
+on register submit, return to user saying to check email
+
+user slice for redux store; on confirm email and redirect, update user slice again
+
+const { data: { user } } = await supabase.auth.getUser() for checking user
+
+const { data, error } = await supabase.auth.signUp(
+  {
+    email: 'example@email.com',
+    password: 'example-password',
+    options: {
+      data: {
+        first_name: 'John',
+        age: 27,
+      }
+    }
+  }
+) for signup with additional data; probably add username and birth date ?
