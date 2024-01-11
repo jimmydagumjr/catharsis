@@ -67,6 +67,7 @@
   transform: translateY(-222%);
   width: 100%;
   text-align: center;
+  font-family: "Courier";
 }
 
 .loadingContainer {
