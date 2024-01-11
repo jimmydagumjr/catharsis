@@ -4,6 +4,7 @@ import {
   EmailIcon,
   PasswordIcon,
   GithubIcon,
+  LoadingIcon,
 } from "../assets/svgs/AuthIcons.jsx";
 import AuthCSS from "./../assets/css/Auth.module.css";
 
@@ -11,6 +12,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const signInWithEmail = async () => {
     setLoading(true);
@@ -20,7 +22,9 @@ const Auth = () => {
     });
 
     if (error) {
-      console.log(error.message);
+      setError(error.message.toLowerCase());
+      setLoading(false);
+      return;
     }
   };
 
@@ -50,7 +54,9 @@ const Auth = () => {
     });
 
     if (error) {
-      console.log(error.message);
+      setError(error.message.toLowerCase());
+      setLoading(false);
+      return;
     }
     setLoading(false);
   };
@@ -68,8 +74,8 @@ const Auth = () => {
   //   };
 
   return (
-    <div>
-      {loading && <p>Loading...</p>}
+    <div className={AuthCSS.authBody}>
+      {error && <p className={AuthCSS.error}>{error}</p>}
       <form className={AuthCSS.formContainer}>
         <div className={AuthCSS.gButtonContainer}>
           <button type="button" onClick={signInWithGithub}>
@@ -97,26 +103,27 @@ const Auth = () => {
             />
           </label>
         </div>
-        <div>
-          <button
-            className={AuthCSS.signButtons}
-            type="button"
-            onClick={signInWithEmail}
-          >
-            sign in
-          </button>
-          <button className={AuthCSS.signButtons} type="button">
-            register
-          </button>
-        </div>
+
+        <button
+          className={AuthCSS.signInButton}
+          type="button"
+          onClick={signInWithEmail}
+        >
+          sign in
+        </button>
 
         {/* <button type="button" onClick={changePassword}>
           Change Password
         </button> */}
-
-        {/* <button className={AuthCSS.pResetButton} type="button">
+        <button className={AuthCSS.miscButtons} type="button">
           forgot password
-        </button> */}
+        </button>
+        <button className={AuthCSS.miscButtons} type="button">
+          register
+        </button>
+        <div className={AuthCSS.loadingContainer}>
+        {loading && <LoadingIcon className={AuthCSS.loading} />}
+        </div>
       </form>
     </div>
   );

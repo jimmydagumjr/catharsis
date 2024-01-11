@@ -1,55 +1,80 @@
+.authBody {
+  position: relative;
+}
+
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gButtonContainer {
-    margin-bottom: 2.2rem;
+  margin-bottom: 2.2rem;
 }
 
 .formItem {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .formItem svg {
-    margin-right: .8rem;
+  margin-right: 0.8rem;
 }
 
 .formItem input {
-    all: revert;
-    background-color: var(--white);
-    border: none;
-    border-radius: 1.4rem;
-    color: var(--black);
-    letter-spacing: 0px;
-    width: 20rem;
-    height: 0.4rem;
-    outline: none;
-    padding: 2rem;
-    font-family: "Courier";
+  all: revert;
+  background-color: var(--white);
+  border: none;
+  border-radius: 1.4rem;
+  color: var(--black);
+  letter-spacing: 0px;
+  width: 20rem;
+  height: 0.4rem;
+  outline: none;
+  padding: 2rem;
+  font-family: "Courier";
 }
 
 .formItem input::placeholder {
-    color: var(--gray);
+  color: var(--gray);
 }
 
-.signButtons {
-    width: 10rem;
-    height: 3rem;
-    /* background-color: var(--white); */
-    font-size: 2rem;
-    font-family: "HelveticaNeue";
-    font-weight: 500;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 0.8rem;
-    border-radius: 1.4rem;
+.signInButton {
+  font-size: 1.8rem;
+  font-family: "HelveticaNeue";
+  font-weight: 500;
+  margin: 1rem;
+  border-radius: 1.4rem;
 }
 
-.pResetButton {
-    font-size: 1rem;
-    color: var(--lightgray);
-    margin-top: 0.6rem;
+.miscButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.miscButtons {
+  font-size: 1rem;
+  color: var(--lightgray);
+  margin-top: 0.2rem;
+  font-family: "Courier";
+}
+
+.error {
+  color: var(--darkred);
+  position: absolute;
+  top: 0;
+  transform: translateY(-222%);
+  width: 100%;
+  text-align: center;
+}
+
+.loadingContainer {
+  position: absolute;
+  top: 107%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999; /* Set a high z-index to make sure it's on top */
+  width: 100%;
+  text-align: center;
 }
