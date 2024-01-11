@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSession } from "./../redux/userSessionSlice.jsx";
 import { supabase } from "./../lib/helper/supaBaseClient.jsx";
 import {
   EmailIcon,
@@ -10,11 +12,52 @@ import {
 import AuthCSS from "./../assets/css/Auth.module.css";
 
 const Auth = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [redirecting, setRedirecting] = useState(true);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
+  const userSession = useSelector((state) => state.userSession);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (session) {
+          dispatch(setSession(session));
+          if (window.location.pathname !== "/") {
+            navigate("/");
+          }
+        } else {
+          setRedirecting(false);
+        }
+      } catch (error) {
+        console.error("user session: ", error);
+        setRedirecting(false);
+      }
+    };
+
+    checkSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      dispatch(setSession(session));
+      if (session) {
+        navigate("/");
+      } else {
+        setRedirecting(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [dispatch, navigate]);
 
   const signInWithEmail = async () => {
     setLoading(true);
@@ -31,31 +74,14 @@ const Auth = () => {
   };
 
   const redirectToRegister = () => {
-    navigate("/register");
+    console.log("register");
+    setShowRegisterForm(true);
   };
 
   const redirectToResetPassword = () => {
-    navigate("/resetpassword");
+    console.log("resetpw");
+    setShowForgotPasswordForm(true);
   };
-
-  //   const signUpWithEmail = async () => {
-  //     setLoading(true);
-  //     const {
-  //       data: { session },
-  //       error,
-  //     } = await supabase.auth.signUp({
-  //       email: email,
-  //       password: password,
-  //     });
-
-  //     if (error) {
-  //       console.log(error.message);
-  //     }
-  //     if (!session) {
-  //       return <div>check inbox for email verification</div>;
-  //     }
-  //     setLoading(false);
-  //   };
 
   const signInWithGithub = async () => {
     setLoading(true);
@@ -71,31 +97,38 @@ const Auth = () => {
     setLoading(false);
   };
 
-  //   const changePassword = async () => {
-  //     setLoading(true);
-  //     const { error } = await supabase.auth.update({
-  //       password: password,
-  //     });
+  useEffect(() => {
+    if (userSession.isAuthenticated) {
+      navigate("/");
+      console.log(userSession.isAuthenticated);
+    }
+  }, [userSession.isAuthenticated, navigate]);
 
-  //     if (error) {
-  //       console.log(error.message);
-  //     }
-  //     setLoading(false);
-  //   };
+  if (redirecting) {
+    return <p>redirecting...</p>;
+  }
 
   return (
-    <AuthLoginForm
-      error={error}
-      email={email}
-      password={password}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      signInWithGithub={signInWithGithub}
-      signInWithEmail={signInWithEmail}
-      redirectToResetPassword={redirectToResetPassword}
-      redirectToRegister={redirectToRegister}
-      loading={loading}
-    />
+    <div className={AuthCSS.authBody}>
+      {showRegisterForm ? (
+        <AuthRegisterForm />
+      ) : showForgotPasswordForm ? (
+        <AuthForgotPasswordForm />
+      ) : (
+        <AuthLoginForm
+          error={error}
+          email={email}
+          password={password}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          signInWithGithub={signInWithGithub}
+          signInWithEmail={signInWithEmail}
+          redirectToResetPassword={redirectToResetPassword}
+          redirectToRegister={redirectToRegister}
+          loading={loading}
+        />
+      )}
+    </div>
   );
 };
 
@@ -111,7 +144,7 @@ const AuthLoginForm = ({
   redirectToRegister,
   loading,
 }) => (
-  <div className={AuthCSS.authBody}>
+  <>
     {error && <p className={AuthCSS.error}>{error}</p>}
     <form className={AuthCSS.formContainer}>
       <div className={AuthCSS.gButtonContainer}>
@@ -166,7 +199,46 @@ const AuthLoginForm = ({
         {loading && <LoadingIcon className={AuthCSS.loading} />}
       </div>
     </form>
-  </div>
+  </>
+);
+
+const AuthRegisterForm = () => (
+  <div>register</div>
+);
+
+const AuthForgotPasswordForm = () => (
+  <div>forgot password</div>
 );
 
 export default Auth;
+
+//   const changePassword = async () => {
+//     setLoading(true);
+//     const { error } = await supabase.auth.update({
+//       password: password,
+//     });
+
+//     if (error) {
+//       console.log(error.message);
+//     }
+//     setLoading(false);
+//   };
+
+//   const signUpWithEmail = async () => {
+//     setLoading(true);
+//     const {
+//       data: { session },
+//       error,
+//     } = await supabase.auth.signUp({
+//       email: email,
+//       password: password,
+//     });
+
+//     if (error) {
+//       console.log(error.message);
+//     }
+//     if (!session) {
+//       return <div>check inbox for email verification</div>;
+//     }
+//     setLoading(false);
+//   };

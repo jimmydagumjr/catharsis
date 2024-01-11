@@ -42,3 +42,14 @@ on register page, redirect to home page if session exists; user must log out fir
 like button and like count to the right of spotify button on music page
 
 add loading icons to playlist and gallery when fetching asynchronously from database
+
+add a section in settings to connect github to user account if github not connected yet in current user's account
+
+register form has a back functionality and shows login form again
+
+forgot password form has a back functionality and shows login form again
+
+for the upload forms, disable component/button clicks when uploading state is true
+possibly do the same for auth forms^
+
+if no user session from redux store present, and user clicks on either upload, like, or attempts to comment, or live chat functionality in the future(?) and sends a live chat, then send to login page
