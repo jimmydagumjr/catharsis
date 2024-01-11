@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "./../lib/helper/supaBaseClient.jsx";
 import {
   EmailIcon,
@@ -9,6 +10,7 @@ import {
 import AuthCSS from "./../assets/css/Auth.module.css";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,6 +28,14 @@ const Auth = () => {
       setLoading(false);
       return;
     }
+  };
+
+  const redirectToRegister = () => {
+    navigate("/register");
+  };
+
+  const redirectToResetPassword = () => {
+    navigate("/resetpassword");
   };
 
   //   const signUpWithEmail = async () => {
@@ -74,59 +84,89 @@ const Auth = () => {
   //   };
 
   return (
-    <div className={AuthCSS.authBody}>
-      {error && <p className={AuthCSS.error}>{error}</p>}
-      <form className={AuthCSS.formContainer}>
-        <div className={AuthCSS.gButtonContainer}>
-          <button type="button" onClick={signInWithGithub}>
-            <GithubIcon />
-          </button>
-        </div>
-        <div className={AuthCSS.labelContainer}>
-          <label className={AuthCSS.formItem}>
-            <EmailIcon />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="email"
-            />
-          </label>
-          <br />
-          <label className={AuthCSS.formItem}>
-            <PasswordIcon />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="password"
-            />
-          </label>
-        </div>
-
-        <button
-          className={AuthCSS.signInButton}
-          type="button"
-          onClick={signInWithEmail}
-        >
-          sign in
-        </button>
-
-        {/* <button type="button" onClick={changePassword}>
-          Change Password
-        </button> */}
-        <button className={AuthCSS.miscButtons} type="button">
-          forgot password
-        </button>
-        <button className={AuthCSS.miscButtons} type="button">
-          register
-        </button>
-        <div className={AuthCSS.loadingContainer}>
-        {loading && <LoadingIcon className={AuthCSS.loading} />}
-        </div>
-      </form>
-    </div>
+    <AuthLoginForm
+      error={error}
+      email={email}
+      password={password}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      signInWithGithub={signInWithGithub}
+      signInWithEmail={signInWithEmail}
+      redirectToResetPassword={redirectToResetPassword}
+      redirectToRegister={redirectToRegister}
+      loading={loading}
+    />
   );
 };
+
+const AuthLoginForm = ({
+  error,
+  email,
+  password,
+  setEmail,
+  setPassword,
+  signInWithGithub,
+  signInWithEmail,
+  redirectToResetPassword,
+  redirectToRegister,
+  loading,
+}) => (
+  <div className={AuthCSS.authBody}>
+    {error && <p className={AuthCSS.error}>{error}</p>}
+    <form className={AuthCSS.formContainer}>
+      <div className={AuthCSS.gButtonContainer}>
+        <button type="button" onClick={signInWithGithub}>
+          <GithubIcon />
+        </button>
+      </div>
+      <div className={AuthCSS.labelContainer}>
+        <label className={AuthCSS.formItem}>
+          <EmailIcon />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
+          />
+        </label>
+        <br />
+        <label className={AuthCSS.formItem}>
+          <PasswordIcon />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
+          />
+        </label>
+      </div>
+
+      <button
+        className={AuthCSS.signInButton}
+        type="button"
+        onClick={signInWithEmail}
+      >
+        sign in
+      </button>
+      <button
+        className={AuthCSS.miscButtons}
+        type="button"
+        onClick={redirectToResetPassword}
+      >
+        forgot password
+      </button>
+      <button
+        className={AuthCSS.miscButtons}
+        type="button"
+        onClick={redirectToRegister}
+      >
+        register
+      </button>
+      <div className={AuthCSS.loadingContainer}>
+        {loading && <LoadingIcon className={AuthCSS.loading} />}
+      </div>
+    </form>
+  </div>
+);
 
 export default Auth;

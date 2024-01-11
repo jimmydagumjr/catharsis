@@ -28,3 +28,17 @@ upload page should only be accessible to my uid jwt token
 create search component for music playlist and gallery
 
 create filter component for gallery
+
+let users set username and possibly change username in the future
+
+maybe add a realtime chat for each user profile if scaled
+
+settings page for change password, email, username
+
+in settings page, use popups for changing and reuse auth; make sure to have popup for log in first
+
+on register page, redirect to home page if session exists; user must log out first
+
+like button and like count to the right of spotify button on music page
+
+add loading icons to playlist and gallery when fetching asynchronously from database
