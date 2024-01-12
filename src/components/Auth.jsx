@@ -105,7 +105,7 @@ const Auth = () => {
   const signInWithGithub = async () => {
     try {
       setLoading(true);
-      const { user, session, error } = await supabase.auth.signInWithOAuth({
+      const { data: {session}, error } = await supabase.auth.signInWithOAuth({
         provider: "github",
       });
 

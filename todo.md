@@ -1,13 +1,10 @@
-# to do so i wont forget
+# to do
 1. photobook
-    -use sql
     -flask & python maybe to extract image data
     -store data into sql
     -query and retrieve to show back on frontend
-    -all photos should by hyperlinked(idk where to store photos yet)
+    -all photos should by hyperlinked(currently do not have the funds to buy any bucket... [currently broke])
     -implement better image loading technique and automate images
-2. music player
-    -sql for database also
 
 SET MINIMIZED TO FALSE WHEN CLICKING ON PLAYLIST ITEM
 
@@ -72,3 +69,7 @@ const { data, error } = await supabase.auth.signUp(
     }
   }
 ) for signup with additional data; probably add username and birth date ?
+
+
+
+REMOVE SESSION SLICE?? already server side in supabase
