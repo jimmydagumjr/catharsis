@@ -32,7 +32,6 @@ const Auth = () => {
           data: { session },
         } = await supabase.auth.getSession();
         if (session) {
-          dispatch(setSession(session));
           if (window.location.pathname !== "/") {
             navigate("/");
           }
@@ -82,7 +81,7 @@ const Auth = () => {
   const signInWithEmail = async () => {
     try {
       setLoading(true);
-      const { user, session, error } = await supabase.auth.signInWithPassword({
+      const { data: { session }, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
@@ -105,7 +104,10 @@ const Auth = () => {
   const signInWithGithub = async () => {
     try {
       setLoading(true);
-      const { data: {session}, error } = await supabase.auth.signInWithOAuth({
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.signInWithOAuth({
         provider: "github",
       });
 

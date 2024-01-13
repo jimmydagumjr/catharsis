@@ -6,6 +6,8 @@
     -all photos should by hyperlinked(currently do not have the funds to buy any bucket... [currently broke])
     -implement better image loading technique and automate images
 
+create minimized reducer & state for music player
+
 SET MINIMIZED TO FALSE WHEN CLICKING ON PLAYLIST ITEM
 
 ADD CIRCLE AND BLUR FILTER AROUND SVG
@@ -73,3 +75,7 @@ const { data, error } = await supabase.auth.signUp(
 
 
 REMOVE SESSION SLICE?? already server side in supabase
+
+if user is null redirect to login, if user is not authenticated, return (user not authenticated, check email for verification)
+
+call setSession at top level(initialization/refresh), when liking, when commenting, when uploading, and when trying to access upload page(deny user if not admin)

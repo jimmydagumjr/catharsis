@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  session: null,
+  user: null,
   isAuthenticated: false,
 };
 
@@ -10,12 +10,16 @@ const sessionSlice = createSlice({
   initialState,
   reducers: {
     setSession: (state, action) => {
-      state.session = action.payload;
-      state.isAuthenticated = !!action.payload;
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: Object.keys(action.payload).length > 0,
+      };
     },
-    clearSession: (state) => {
-      state.session = null;
-      state.isAuthenticated = false;
+    clearSession: () => {
+      return {
+        ...initialState,
+      };
     },
   },
 });
