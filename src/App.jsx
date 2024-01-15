@@ -9,10 +9,12 @@ import Catharsis from "./pages/Catharsis";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
+import SessionChecker from "./components/SessionChecker";
 
 function App() {
   return (
     <>
+      <SessionChecker />
       <Navbar />
       <RoutesWithAnimation />
       <MusicPlayer />

@@ -23,147 +23,59 @@ const Auth = () => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
   const session = useSelector((state) => state.session);
-
-  // check if current session already exists(make sure user is signed out)
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        if (session) {
-          if (window.location.pathname !== "/") {
-            navigate("/");
-          }
-        } else {
-          setRedirecting(false);
-        }
-      } catch (error) {
-        console.error("user session: ", error);
-        setRedirecting(false);
-      }
-    };
-
-    checkSession();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      dispatch(setSession(session));
-      if (session) {
-        navigate("/");
-      } else {
-        setRedirecting(false);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [dispatch, navigate]);
+  const [verificationMessage, setVerificationMessage] = useState(false);
 
   // form redirects
-  const redirectToRegister = () => {
-    if (error) setError(null);
-    setShowRegisterForm(true);
-  };
-
-  const redirectToResetPassword = () => {
-    if (error) setError(null);
-    setShowForgotPasswordForm(true);
-  };
-
-  const redirectToLogin = () => {
-    if (error) setError(null);
-    if (showRegisterForm) setShowRegisterForm(false);
-    if (showForgotPasswordForm) setShowForgotPasswordForm(false);
-  };
+  const handleFormRedirect = formRedirect(
+    error,
+    setShowRegisterForm,
+    setShowForgotPasswordForm,
+  );
 
   // email sign in
-  const signInWithEmail = async () => {
-    try {
-      setLoading(true);
-      const { data: { session }, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
-
-      if (error) {
-        setError(error.message.toLowerCase());
-        setLoading(false);
-        return;
-      }
-
-      dispatch(setSession(session));
-    } catch (error) {
-      console.error("sign-in error: ", error);
-      setError("failed to sign in");
-      setLoading(false);
-    }
-  };
+  const handleSignInWithEmail = () =>
+    signInWithEmail(
+      email,
+      password,
+      setLoading,
+      setError,
+      dispatch,
+      setSession,
+    );
 
   // github sign in
-  const signInWithGithub = async () => {
-    try {
-      setLoading(true);
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.signInWithOAuth({
-        provider: "github",
-      });
-
-      if (error) {
-        setError(error.message.toLowerCase());
-        setLoading(false);
-        return;
-      }
-
-      dispatch(setSession(session));
-    } catch (error) {
-      console.error("sign-in error: ", error);
-      setError("failed to sign in");
-      setLoading(false);
-    }
-  };
+  const handleSignInWithGithub = () =>
+    signInWithGithub(setLoading, setError, dispatch, setSession);
 
   // register user
-  const registerUser = async () => {
-    try {
-      setLoading(true);
-
-      if (password !== confirmPassword) {
-        setError("passwords don't match");
-        setLoading(false);
-        return;
-      }
-
-      const { user, session, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
-
-      if (error) {
-        setError(error.message.toLowerCase());
-        setLoading(false);
-        return;
-      }
-
-      dispatch(setSession(session));
-    } catch (error) {
-      console.error("registration error: ", error);
-      setError("failed to register user");
-      setLoading(false);
-    }
-  };
+  const handleRegisterUser = () =>
+    registerUser(
+      email,
+      password,
+      confirmPassword,
+      setLoading,
+      setError,
+      setVerificationMessage,
+      dispatch,
+      setSession,
+    );
 
   // redirect if authenticated account
   useEffect(() => {
-    if (session.isAuthenticated) {
-      navigate("/");
-    }
-  }, [session.isAuthenticated, navigate]);
+    authRedirection(
+      session,
+      navigate,
+      setVerificationMessage,
+      setRedirecting,
+    );
+  }, [session, navigate]);
 
   if (redirecting) {
     return <p>redirecting...</p>;
+  }
+
+  if (verificationMessage) {
+    return <p>verify your email</p>;
   }
 
   return (
@@ -177,8 +89,8 @@ const Auth = () => {
           setEmail={setEmail}
           setPassword={setPassword}
           setConfirmPassword={setConfirmPassword}
-          registerUser={registerUser}
-          redirectToLogin={redirectToLogin}
+          registerUser={handleRegisterUser}
+          redirectToLogin={() => handleFormRedirect("login")}
           loading={loading}
         />
       ) : showForgotPasswordForm ? (
@@ -190,15 +102,150 @@ const Auth = () => {
           password={password}
           setEmail={setEmail}
           setPassword={setPassword}
-          signInWithGithub={signInWithGithub}
-          signInWithEmail={signInWithEmail}
-          redirectToResetPassword={redirectToResetPassword}
-          redirectToRegister={redirectToRegister}
+          signInWithGithub={handleSignInWithGithub}
+          signInWithEmail={handleSignInWithEmail}
+          redirectToResetPassword={() => handleFormRedirect("resetPassword")}
+          redirectToRegister={() => handleFormRedirect("register")}
           loading={loading}
         />
       )}
     </div>
   );
+};
+
+const formRedirect =
+  (error, setShowRegisterForm, setShowForgotPasswordForm) => (action) => {
+    if (error) setError(null);
+
+    switch (action) {
+      case "register":
+        setShowRegisterForm(true);
+        break;
+      case "resetPassword":
+        setShowForgotPasswordForm(true);
+        break;
+      case "login":
+        setShowRegisterForm(false);
+        setShowForgotPasswordForm(false);
+        break;
+      default:
+        break;
+    }
+  };
+
+const authRedirection = (
+  session,
+  navigate,
+  setVerificationMessage,
+  setRedirecting,
+) => {
+  if (session.user) {
+    if (session.user.user_metadata.email_verified === false) {
+      setVerificationMessage(true);
+    } else if (session.user.user_metadata.email_verified === true) {
+      navigate("/");
+    }
+  } else {
+    setRedirecting(false);
+  }
+};
+
+const signInWithEmail = async (
+  email,
+  password,
+  setLoading,
+  setError,
+  dispatch,
+  setSession,
+) => {
+  try {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      setError(error.message.toLowerCase());
+      setLoading(false);
+      return;
+    }
+
+    dispatch(setSession(session));
+  } catch (error) {
+    console.error("sign-in error: ", error);
+    setError("failed to sign in");
+    setLoading(false);
+  }
+};
+
+const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
+  try {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+
+    if (error) {
+      setError(error.message.toLowerCase());
+      setLoading(false);
+      return;
+    }
+
+    dispatch(setSession(session));
+  } catch (error) {
+    console.error("sign-in error: ", error);
+    setError("failed to sign in");
+    setLoading(false);
+  }
+};
+
+const registerUser = async (
+  email,
+  password,
+  confirmPassword,
+  setLoading,
+  setError,
+  setVerificationMessage,
+  dispatch,
+  setSession,
+) => {
+  try {
+    setLoading(true);
+
+    if (password !== confirmPassword) {
+      setError("passwords don't match");
+      setLoading(false);
+      return;
+    }
+
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      setError(error.message.toLowerCase());
+      setLoading(false);
+      return;
+    }
+
+    setVerificationMessage(true);
+    dispatch(setSession(session));
+  } catch (error) {
+    console.error("registration error: ", error);
+    setError("failed to register user");
+    setLoading(false);
+  }
 };
 
 const AuthLoginForm = ({

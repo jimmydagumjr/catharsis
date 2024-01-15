@@ -72,10 +72,8 @@ const { data, error } = await supabase.auth.signUp(
   }
 ) for signup with additional data; probably add username and birth date ?
 
-
-
-REMOVE SESSION SLICE?? already server side in supabase
-
 if user is null redirect to login, if user is not authenticated, return (user not authenticated, check email for verification)
 
 call setSession at top level(initialization/refresh), when liking, when commenting, when uploading, and when trying to access upload page(deny user if not admin)
+
+read from redux: session -> user -> user_metadata -> email_verified
