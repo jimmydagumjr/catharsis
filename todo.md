@@ -28,8 +28,6 @@ create search component for music playlist and gallery
 
 create filter component for gallery
 
-let users set username and possibly change username in the future
-
 maybe add a realtime chat for each user profile if scaled
 
 settings page for change password, email, username
@@ -44,10 +42,6 @@ add loading icons to playlist and gallery when fetching asynchronously from data
 
 add a section in settings to connect github to user account if github not connected yet in current user's account
 
-register form has a back functionality and shows login form again
-
-forgot password form has a back functionality and shows login form again
-
 for the upload forms, disable component/button clicks when uploading state is true
 possibly do the same for auth forms^
 
@@ -59,21 +53,22 @@ user slice for redux store; on confirm email and redirect, update user slice aga
 
 const { data: { user } } = await supabase.auth.getUser() for checking user
 
-const { data, error } = await supabase.auth.signUp(
-  {
-    email: 'example@email.com',
-    password: 'example-password',
-    options: {
-      data: {
-        first_name: 'John',
-        age: 27,
-      }
-    }
-  }
-) for signup with additional data; probably add username and birth date ?
-
 if user is null redirect to login, if user is not authenticated, return (user not authenticated, check email for verification)
 
 call setSession at top level(initialization/refresh), when liking, when commenting, when uploading, and when trying to access upload page(deny user if not admin)
 
-read from redux: session -> user -> user_metadata -> email_verified
+forgot password section, change username section, account settings page(/user/settings)
+
+on github redirect, create username form if !username
+
+add birth date to sign up form?
+
+add reserved usernames like admin, root, catharsis, saint, cathartic, test, settings, etc.
+
+create pages for /user/{username} and redirect to user settings if logged in(/user/{username}/settings) otherwise redirect to /login
+
+fix error styling for long error codes(see password regex error code)
+
+verify your email styling
+
+use 3rd party smtp provider for email verification and password resets. supabase limits to 4/hr. possibly use sendgrid or smtp2go.com

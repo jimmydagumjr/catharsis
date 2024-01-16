@@ -61,7 +61,7 @@
 .error {
   color: var(--darkred);
   position: absolute;
-  top: 0;
+  top: 0%;
   transform: translateY(-222%);
   width: 100%;
   text-align: center;

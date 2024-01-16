@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSession } from "../redux/sessionSlice.jsx";
 import { supabase } from "./../lib/helper/supaBaseClient.jsx";
 import {
+  UserIcon,
   EmailIcon,
   PasswordIcon,
   GithubIcon,
@@ -14,6 +15,7 @@ import AuthCSS from "./../assets/css/Auth.module.css";
 const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,8 +30,13 @@ const Auth = () => {
   // form redirects
   const handleFormRedirect = formRedirect(
     error,
+    setError,
     setShowRegisterForm,
     setShowForgotPasswordForm,
+    setUsername,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
   );
 
   // email sign in
@@ -50,6 +57,7 @@ const Auth = () => {
   // register user
   const handleRegisterUser = () =>
     registerUser(
+      username,
       email,
       password,
       confirmPassword,
@@ -62,12 +70,7 @@ const Auth = () => {
 
   // redirect if authenticated account
   useEffect(() => {
-    authRedirection(
-      session,
-      navigate,
-      setVerificationMessage,
-      setRedirecting,
-    );
+    authRedirection(session, navigate, setVerificationMessage, setRedirecting);
   }, [session, navigate]);
 
   if (redirecting) {
@@ -83,9 +86,11 @@ const Auth = () => {
       {showRegisterForm ? (
         <AuthRegisterForm
           error={error}
+          username={username}
           email={email}
           password={password}
           confirmPassword={confirmPassword}
+          setUsername={setUsername}
           setEmail={setEmail}
           setPassword={setPassword}
           setConfirmPassword={setConfirmPassword}
@@ -114,8 +119,24 @@ const Auth = () => {
 };
 
 const formRedirect =
-  (error, setShowRegisterForm, setShowForgotPasswordForm) => (action) => {
+  (
+    error,
+    setError,
+    setShowRegisterForm,
+    setShowForgotPasswordForm,
+    setUsername,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
+  ) =>
+  (action) => {
     if (error) setError(null);
+
+    // reset form values
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
 
     switch (action) {
       case "register":
@@ -140,9 +161,15 @@ const authRedirection = (
   setRedirecting,
 ) => {
   if (session.user) {
-    if (session.user.user_metadata.email_verified === false) {
+    if (
+      session.user.user_metadata.email_verified === false ||
+      !session.user.email_confirmed_at
+    ) {
       setVerificationMessage(true);
-    } else if (session.user.user_metadata.email_verified === true) {
+    } else if (
+      session.user.user_metadata.email_verified === true ||
+      session.user.email_confirmed_at
+    ) {
       navigate("/");
     }
   } else {
@@ -160,6 +187,10 @@ const signInWithEmail = async (
 ) => {
   try {
     setLoading(true);
+    if (!validateInput({ email, password }, setError, setLoading)) {
+      return;
+    }
+
     const {
       data: { session },
       error,
@@ -167,14 +198,17 @@ const signInWithEmail = async (
       email: email,
       password: password,
     });
+    if (session) {
+      dispatch(setSession(session));
+      setLoading(false);
+      return;
+    }
 
     if (error) {
       setError(error.message.toLowerCase());
       setLoading(false);
       return;
     }
-
-    dispatch(setSession(session));
   } catch (error) {
     console.error("sign-in error: ", error);
     setError("failed to sign in");
@@ -207,6 +241,7 @@ const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
 };
 
 const registerUser = async (
+  username,
   email,
   password,
   confirmPassword,
@@ -218,9 +253,28 @@ const registerUser = async (
 ) => {
   try {
     setLoading(true);
+    if (
+      !validateInput(
+        { username, email, password, confirmPassword },
+        setError,
+        setLoading,
+      )
+    ) {
+      return;
+    }
 
-    if (password !== confirmPassword) {
-      setError("passwords don't match");
+    const usernameRegex = /^[a-z]{3,15}$/;
+    if (!usernameRegex.test(username)) {
+      setError("username must be 3-15 lowercase letters");
+      setLoading(false);
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setError(
+        "password must contain a minimum of 8 characters and one uppercase letter",
+      );
       setLoading(false);
       return;
     }
@@ -231,6 +285,11 @@ const registerUser = async (
     } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: username.toLowerCase(),
+        },
+      },
     });
 
     if (error) {
@@ -245,6 +304,31 @@ const registerUser = async (
     console.error("registration error: ", error);
     setError("failed to register user");
     setLoading(false);
+  }
+};
+
+const validateInput = (...args) => {
+  const { username, email, password, confirmPassword } = args[0];
+  const [setError, setLoading] = args.slice(1);
+  switch (true) {
+    case "username" in args[0] && !username:
+      setError("username is required");
+      setLoading(false);
+      return false;
+    case "email" in args[0] && !email:
+      setError("email is required");
+      setLoading(false);
+      return false;
+    case "password" in args[0] && !password:
+      setError("password is required");
+      setLoading(false);
+      return false;
+    case "confirmPassword" in args[0] && password !== confirmPassword:
+      setError("passwords don't match");
+      setLoading(false);
+      return false;
+    default:
+      return true;
   }
 };
 
@@ -322,9 +406,11 @@ const AuthLoginForm = ({
 
 const AuthRegisterForm = ({
   error,
+  username,
   email,
   password,
   confirmPassword,
+  setUsername,
   setEmail,
   setPassword,
   setConfirmPassword,
@@ -336,6 +422,16 @@ const AuthRegisterForm = ({
     {error && <p className={AuthCSS.error}>{error}</p>}
     <form className={AuthCSS.formContainer}>
       <div className={AuthCSS.labelContainer}>
+        <label className={AuthCSS.formItem}>
+          <UserIcon />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="username"
+          />
+        </label>
+        <div className={AuthCSS.break} />
         <label className={AuthCSS.formItem}>
           <EmailIcon />
           <input
@@ -392,34 +488,3 @@ const AuthRegisterForm = ({
 const AuthForgotPasswordForm = () => <div>forgot password</div>;
 
 export default Auth;
-
-//   const changePassword = async () => {
-//     setLoading(true);
-//     const { error } = await supabase.auth.update({
-//       password: password,
-//     });
-
-//     if (error) {
-//       console.log(error.message);
-//     }
-//     setLoading(false);
-//   };
-
-//   const signUpWithEmail = async () => {
-//     setLoading(true);
-//     const {
-//       data: { session },
-//       error,
-//     } = await supabase.auth.signUp({
-//       email: email,
-//       password: password,
-//     });
-
-//     if (error) {
-//       console.log(error.message);
-//     }
-//     if (!session) {
-//       return <div>check inbox for email verification</div>;
-//     }
-//     setLoading(false);
-//   };

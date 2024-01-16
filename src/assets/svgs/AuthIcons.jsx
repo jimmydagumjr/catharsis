@@ -1,3 +1,23 @@
+export const UserIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M5 21c0-3.866 3.13401-7 7-7 3.866 0 7 3.134 7 7M16 7c0 2.20914-1.7909 4-4 4-2.20914 0-4-1.79086-4-4s1.79086-4 4-4c2.2091 0 4 1.79086 4 4Z"
+      />
+    </svg>
+  );
+};
+
 export const EmailIcon = () => {
   return (
     <svg
