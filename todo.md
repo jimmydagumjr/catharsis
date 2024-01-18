@@ -63,8 +63,6 @@ on github redirect, create username form if !username
 
 add birth date to sign up form?
 
-add reserved usernames like admin, root, catharsis, saint, cathartic, test, settings, etc.
-
 create pages for /user/{username} and redirect to user settings if logged in(/user/{username}/settings) otherwise redirect to /login
 
 fix error styling for long error codes(see password regex error code)
@@ -72,5 +70,3 @@ fix error styling for long error codes(see password regex error code)
 verify your email styling
 
 use 3rd party smtp provider for email verification and password resets. supabase limits to 4/hr. possibly use sendgrid or smtp2go.com
-
-check issues w sql queries in supabase regarding username once email limit resets

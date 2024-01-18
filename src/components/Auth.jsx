@@ -187,10 +187,13 @@ const signInWithEmail = async (
 ) => {
   try {
     setLoading(true);
+
+    // input validation
     if (!validateInput({ email, password }, setError, setLoading)) {
       return;
     }
 
+    // supabase sign in w/ email
     const {
       data: { session },
       error,
@@ -198,17 +201,22 @@ const signInWithEmail = async (
       email: email,
       password: password,
     });
+
+    // successful validation
     if (session) {
       dispatch(setSession(session));
       setLoading(false);
       return;
     }
 
+    // handle supabase errors
     if (error) {
       setError(error.message.toLowerCase());
       setLoading(false);
       return;
     }
+
+    // handle misc errors
   } catch (error) {
     console.error("sign-in error: ", error);
     setError("failed to sign in");
@@ -219,6 +227,8 @@ const signInWithEmail = async (
 const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
   try {
     setLoading(true);
+
+    // supabase auth sign in w/ github
     const {
       data: { session },
       error,
@@ -226,13 +236,17 @@ const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
       provider: "github",
     });
 
+    // handle supabase errors
     if (error) {
       setError(error.message.toLowerCase());
       setLoading(false);
       return;
     }
 
+    // successful validation
     dispatch(setSession(session));
+
+    // handle misc errors
   } catch (error) {
     console.error("sign-in error: ", error);
     setError("failed to sign in");
@@ -253,6 +267,8 @@ const registerUser = async (
 ) => {
   try {
     setLoading(true);
+
+    // input validation
     if (
       !validateInput(
         { username, email, password, confirmPassword },
@@ -263,6 +279,7 @@ const registerUser = async (
       return;
     }
 
+    // username validation using regex(3-15 lowercase letters)
     const usernameRegex = /^[a-z]{3,15}$/;
     if (!usernameRegex.test(username)) {
       setError("username must be 3-15 lowercase letters");
@@ -270,6 +287,7 @@ const registerUser = async (
       return;
     }
 
+    // password validation using regex (8 char, 1 uppercase letter)
     const passwordRegex = /^(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(password)) {
       setError(
@@ -279,6 +297,7 @@ const registerUser = async (
       return;
     }
 
+    // supabase auth sign up
     const {
       data: { session },
       error,
@@ -292,14 +311,26 @@ const registerUser = async (
       },
     });
 
+    // handle supabase errors
     if (error) {
+      if (
+        error.message.includes(
+          "duplicate key value violates unique constraint",
+        )
+      ) {
+        setError("username is not unique");
+      } else {
       setError(error.message.toLowerCase());
+      }
       setLoading(false);
       return;
     }
 
+    // successful registration
     setVerificationMessage(true);
     dispatch(setSession(session));
+
+    // handle misc errors
   } catch (error) {
     console.error("registration error: ", error);
     setError("failed to register user");
