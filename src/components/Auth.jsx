@@ -27,6 +27,9 @@ const Auth = () => {
   const session = useSelector((state) => state.session);
   const [verificationMessage, setVerificationMessage] = useState(false);
 
+  // base url for use in redirection after sign in w/ OAuth
+  const baseURL = "http://localhost:5173";
+
   // form redirects
   const handleFormRedirect = formRedirect(
     error,
@@ -52,7 +55,7 @@ const Auth = () => {
 
   // github sign in
   const handleSignInWithGithub = () =>
-    signInWithGithub(setLoading, setError, dispatch, setSession);
+    signInWithGithub(baseURL, setLoading, setError, dispatch, setSession);
 
   // register user
   const handleRegisterUser = () =>
@@ -224,7 +227,7 @@ const signInWithEmail = async (
   }
 };
 
-const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
+const signInWithGithub = async (baseURL, setLoading, setError, dispatch, setSession) => {
   try {
     setLoading(true);
 
@@ -234,6 +237,9 @@ const signInWithGithub = async (setLoading, setError, dispatch, setSession) => {
       error,
     } = await supabase.auth.signInWithOAuth({
       provider: "github",
+      options: {
+        redirectTo: `${baseURL}/music`,
+      },
     });
 
     // handle supabase errors
@@ -314,13 +320,11 @@ const registerUser = async (
     // handle supabase errors
     if (error) {
       if (
-        error.message.includes(
-          "duplicate key value violates unique constraint",
-        )
+        error.message.includes("duplicate key value violates unique constraint")
       ) {
         setError("username is not unique");
       } else {
-      setError(error.message.toLowerCase());
+        setError(error.message.toLowerCase());
       }
       setLoading(false);
       return;
