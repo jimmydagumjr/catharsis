@@ -70,3 +70,5 @@ fix error styling for long error codes(see password regex error code)
 verify your email styling
 
 use 3rd party smtp provider for email verification and password resets. supabase limits to 4/hr. possibly use sendgrid or smtp2go.com
+
+NEXT: finish forget password; finish change username
