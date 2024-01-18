@@ -12,10 +12,6 @@ SET MINIMIZED TO FALSE WHEN CLICKING ON PLAYLIST ITEM
 
 ADD CIRCLE AND BLUR FILTER AROUND SVG
 
-BUG WHEN HOVERING NAVBAR MENU NAVBAR IS IN BACKGROUND OR SMTH
-
-make admin route for uploading data(music/pictures)
-
 add logo flip to line when scrolling down
 
 use login page as redirect when trying to upload, also use as redirect when trying to add like or comment after functionality implemented
@@ -70,3 +66,7 @@ fix error styling for long error codes(see password regex error code)
 verify your email styling
 
 use 3rd party smtp provider for email verification and password resets. supabase limits to 4/hr. possibly use sendgrid or smtp2go.com
+
+add 2 navbar -> settings(far right side), upload(left of settings, upload svg on mobile, possibly add to page instead), chat(left side of settings), move gallery(left side, right of music)
+
+on mobile svgs -> music(note?), gallery(camera?), chat(chat bubble?), settings(cog)
