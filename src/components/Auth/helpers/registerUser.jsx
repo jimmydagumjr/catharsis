@@ -1,4 +1,4 @@
-import { supabase } from "../../../lib/helper/supaBaseClient.jsx"
+import { supabase } from "../../../lib/helper/supaBaseClient.jsx";
 import validateInput from "./validateInput.jsx";
 
 const registerUser = async (
@@ -30,6 +30,14 @@ const registerUser = async (
     const usernameRegex = /^[a-z]{3,15}$/;
     if (!usernameRegex.test(username)) {
       setError("username must be 3-15 lowercase letters");
+      setLoading(false);
+      return;
+    }
+
+    // email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("invalid email address");
       setLoading(false);
       return;
     }

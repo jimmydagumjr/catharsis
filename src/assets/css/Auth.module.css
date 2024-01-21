@@ -79,6 +79,12 @@
   text-align: center;
 }
 
+.stateMessage {
+  font-size: 1.8rem;
+  font-family: "Courier";
+  color: var(--black);
+}
+
 .break {
     height: 0.8rem;
 }

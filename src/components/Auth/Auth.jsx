@@ -2,22 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSession } from "../../redux/sessionSlice.jsx";
-import { supabase } from "../../lib/helper/supaBaseClient.jsx";
-import {
-  UserIcon,
-  EmailIcon,
-  PasswordIcon,
-  GithubIcon,
-  LoadingIcon,
-} from "../../assets/svgs/AuthIcons.jsx";
 import AuthCSS from "./../../assets/css/Auth.module.css";
 import signInWithEmail from "./helpers/signInWithEmail.jsx";
 import signInWithGithub from "./helpers/signInWithGithub.jsx";
 import registerUser from "./helpers/registerUser.jsx";
+import resetPassword from "./helpers/resetPassword.jsx";
 import formRedirect from "./helpers/formRedirect.jsx";
 import authRedirection from "./helpers/authRedirection.jsx";
 import AuthLoginForm from "./forms/authLoginForm.jsx";
 import AuthRegisterForm from "./forms/authRegisterForm.jsx";
+import AuthForgotPasswordForm from "./forms/authForgotPasswordForm.jsx";
 
 const Auth = () => {
   const session = useSelector((state) => state.session);
@@ -33,6 +27,7 @@ const Auth = () => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
   const [verificationMessage, setVerificationMessage] = useState(false);
+  const [resetPasswordMessage, setResetPasswordMessage] = useState(false);
 
   // base url for use in redirection after sign in w/ OAuth
   const baseURL = "http://localhost:5173";
@@ -80,7 +75,13 @@ const Auth = () => {
 
   // reset password
   const handleResetPassword = () => {
-    resetPassword();
+    resetPassword(
+      baseURL,
+      email,
+      setLoading,
+      setError,
+      setResetPasswordMessage,
+    );
   };
 
   // redirect if authenticated account
@@ -88,12 +89,16 @@ const Auth = () => {
     authRedirection(session, navigate, setVerificationMessage, setRedirecting);
   }, [session, navigate]);
 
-  if (redirecting) {
-    return <p>redirecting...</p>;
-  }
-
-  if (verificationMessage) {
-    return <p>verify your email</p>;
+  // messages for states
+  switch (true) {
+    case redirecting:
+      return <p className={AuthCSS.stateMessage}>redirecting...</p>;
+    case verificationMessage:
+      return <p className={AuthCSS.stateMessage}>please verify your email</p>;
+    case resetPasswordMessage:
+      return <p className={AuthCSS.stateMessage}>please check your email to reset your password</p>;
+    default:
+      break;
   }
 
   return (
@@ -139,54 +144,5 @@ const Auth = () => {
     </div>
   );
 };
-
-const resetPassword = () => {
-  return;
-};
-
-const AuthForgotPasswordForm = ({
-  error,
-  email,
-  setEmail,
-  resetPassword,
-  redirectToLogin,
-  loading,
-}) => (
-  <>
-    {error && <p className={AuthCSS.error}>{error}</p>}
-    <form className={AuthCSS.formContainer}>
-      <div className={AuthCSS.labelContainer}>
-        <label className={AuthCSS.formItem}>
-          <EmailIcon />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="email"
-          />
-        </label>
-      </div>
-      <div className={AuthCSS.break} />
-      <button
-        className={AuthCSS.submitButtons}
-        type="button"
-        onClick={resetPassword}
-      >
-        reset password
-      </button>
-      <div className={AuthCSS.break} />
-      <button
-        className={AuthCSS.miscButtons}
-        type="button"
-        onClick={redirectToLogin}
-      >
-        back
-      </button>
-      <div className={AuthCSS.loadingContainer}>
-        {loading && <LoadingIcon className={AuthCSS.loading} />}
-      </div>
-    </form>
-  </>
-);
 
 export default Auth;
