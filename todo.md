@@ -72,3 +72,19 @@ add 2 navbar -> settings(far right side), upload(left of settings, upload svg on
 on mobile svgs -> music(note?), gallery(camera?), chat(chat bubble?), settings(cog)
 
 NEXT: finish forget password; finish change username
+
+add upload button component in gray lettering and use on top in music page and gallery page
+
+log out component in upload page, upload page will include upload component(2 forms w/ tabs) and log out component
+
+if user is not admin in upload page, then return log out button and "you have no access to upload"
+
+add a dark green/forest green message for password reset email sent(same placement as error message, clear error message if error & successful)
+
+music database: upload date, top to bottom order(index), cover art, alt text for cover art, 
+
+in upload page: manage/delete and reorganize music, manage pins and placement for gallery page
+
+in gallery page: click to view large photo + comments, pin to top
+
+upload + manage button component only appears for admin sessions?

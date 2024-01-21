@@ -1,5 +1,5 @@
 import React from 'react'
-import Auth from "./../components/Auth.jsx"
+import Auth from "../components/Auth/Auth.jsx"
 import LoginCSS from "./../assets/css/Login.module.css"
 
 const Login = () => {
