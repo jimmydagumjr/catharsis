@@ -1,28 +1,18 @@
 import AuthCSS from "./../../../assets/css/Auth.module.css";
-import {
-  UserIcon,
-  EmailIcon,
-  PasswordIcon,
-  LoadingIcon,
-} from "../../../assets/svgs/AuthIcons.jsx";
+import { PasswordIcon, LoadingIcon } from "../../../assets/svgs/AuthIcons.jsx";
 
-const AuthRegisterForm = ({
+const AuthUpdatePasswordForm = ({
   error,
-  username,
-  email,
   password,
   confirmPassword,
-  setUsername,
-  setEmail,
   setPassword,
   setConfirmPassword,
-  registerUser,
-  redirectToLogin,
+  updatePassword,
   loading,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser();
+    updatePassword();
   };
 
   return (
@@ -30,26 +20,6 @@ const AuthRegisterForm = ({
       {error && <p className={AuthCSS.error}>{error}</p>}
       <form className={AuthCSS.formContainer} onSubmit={handleSubmit}>
         <div className={AuthCSS.labelContainer}>
-          <label className={AuthCSS.formItem}>
-            <UserIcon />
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="username"
-            />
-          </label>
-          <div className={AuthCSS.break} />
-          <label className={AuthCSS.formItem}>
-            <EmailIcon />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="email"
-            />
-          </label>
-          <div className={AuthCSS.break} />
           <label className={AuthCSS.formItem}>
             <PasswordIcon />
             <input
@@ -72,16 +42,9 @@ const AuthRegisterForm = ({
         </div>
         <div className={AuthCSS.break} />
         <button className={AuthCSS.submitButtons} type="submit">
-          register
+          update password
         </button>
         <div className={AuthCSS.break} />
-        <button
-          className={AuthCSS.miscButtons}
-          type="button"
-          onClick={redirectToLogin}
-        >
-          back
-        </button>
         <div className={AuthCSS.loadingContainer}>
           {loading && <LoadingIcon className={AuthCSS.loading} />}
         </div>
@@ -90,4 +53,4 @@ const AuthRegisterForm = ({
   );
 };
 
-export default AuthRegisterForm;
+export default AuthUpdatePasswordForm;

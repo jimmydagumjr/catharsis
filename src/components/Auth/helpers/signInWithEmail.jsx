@@ -1,3 +1,4 @@
+import { supabase } from "../../../lib/helper/supaBaseClient.jsx";
 import validateInput from "./validateInput.jsx";
 
 const signInWithEmail = async (

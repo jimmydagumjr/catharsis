@@ -9,6 +9,7 @@ import Catharsis from "./pages/Catharsis";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
+import ResetPassword from "./pages/ResetPassword";
 import SessionChecker from "./components/SessionChecker";
 
 function App() {
@@ -73,6 +74,14 @@ const RoutesWithAnimation = () => {
           element={
             <Page pageKey="login">
               <Login />
+            </Page>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <Page pageKey="resetPassword">
+              <ResetPassword />
             </Page>
           }
         />

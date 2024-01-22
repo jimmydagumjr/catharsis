@@ -43,27 +43,19 @@ possibly do the same for auth forms^
 
 if no user session from redux store present, and user clicks on either upload, like, or attempts to comment, or live chat functionality in the future(?) and sends a live chat, then send to login page
 
-on register submit, return to user saying to check email
-
-user slice for redux store; on confirm email and redirect, update user slice again
-
 const { data: { user } } = await supabase.auth.getUser() for checking user
-
-if user is null redirect to login, if user is not authenticated, return (user not authenticated, check email for verification)
 
 call setSession at top level(initialization/refresh), when liking, when commenting, when uploading, and when trying to access upload page(deny user if not admin)
 
 forgot password section, change username section, account settings page(/user/settings)
 
-on github redirect, create username form if !username
+on chat attempt, create username form if !username
 
 add birth date to sign up form?
 
 create pages for /user/{username} and redirect to user settings if logged in(/user/{username}/settings) otherwise redirect to /login
 
 fix error styling for long error codes(see password regex error code)
-
-verify your email styling
 
 use 3rd party smtp provider for email verification and password resets. supabase limits to 4/hr. possibly use sendgrid or smtp2go.com
 
@@ -77,8 +69,6 @@ log out component in upload page, upload page will include upload component(2 fo
 
 if user is not admin in upload page, then return log out button and "you have no access to upload"
 
-add a dark green/forest green message for password reset email sent(same placement as error message, clear error message if error & successful)
-
 music database: upload date, top to bottom order(index), cover art, alt text for cover art, 
 
 in upload page: manage/delete and reorganize music, manage pins and placement for gallery page
@@ -87,4 +77,4 @@ in gallery page: click to view large photo + comments, pin to top
 
 upload + manage button component only appears for admin sessions?
 
-NEXT: make reset password page to update user password, finish change username
+NEXT: make user settings page to update username/password(reuse auth component parts), upload button component, and logout in upload, if user !admin, logout button component shows on top of music page and gallery page
