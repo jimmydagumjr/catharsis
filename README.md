@@ -42,3 +42,5 @@ Explore the intersection of emotion, music, and visuals on Catharsis - where cre
 * Finalize the user settings page to ensure a comprehensive and polished user experience.
     
 * Complete the database integration for seamless dynamic fetching and uploading of music and photos.
+
+* Eventual plan of scaling up to a complete social media site.
