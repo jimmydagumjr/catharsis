@@ -81,6 +81,8 @@ NEXT: make user settings page to update username/password(reuse auth component p
 
 upload button on top of music and gallery, but below navbar in gray small, route to music upload form if clicked on music button but still have tab for gallery upload form
 
-settings below upload button possibly if logged in
+settings below upload button possibly if logged in only, also only show on user's page
 
 redirect settings page if logged in
+
+create way to get back to user's page easily, possibly w/ button in chat room
