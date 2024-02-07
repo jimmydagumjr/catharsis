@@ -1,9 +1,7 @@
-import { useDispatch } from "react-redux";
 import { setSession } from "../../../redux/sessionSlice.jsx";
+import { supabase } from "../../../lib/helper/supaBaseClient.jsx";
 
-const signOut = async () => {
-  const dispatch = useDispatch();
-
+const signOut = async (dispatch) => {
   try {
     // sign out then update session
     const { error } = await supabase.auth.signOut();

@@ -1,0 +1,7 @@
+.settingsBody {
+   max-width: 120rem;
+   margin-inline: auto;
+   padding-top: calc(var(--headerheight) + 1.6rem);
+   padding-bottom: 10.2rem;
+   overflow: clip;
+ }

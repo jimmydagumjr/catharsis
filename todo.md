@@ -78,3 +78,9 @@ in gallery page: click to view large photo + comments, pin to top
 upload + manage button component only appears for admin sessions?
 
 NEXT: make user settings page to update username/password(reuse auth component parts), upload button component, and logout in upload, if user !admin, logout button component shows on top of music page and gallery page
+
+upload button on top of music and gallery, but below navbar in gray small, route to music upload form if clicked on music button but still have tab for gallery upload form
+
+settings below upload button possibly if logged in
+
+redirect settings page if logged in

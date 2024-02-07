@@ -6,11 +6,11 @@ import Navbar from "./components/Navbar";
 import Music from "./pages/Music";
 import Gallery from "./pages/Gallery";
 import Catharsis from "./pages/Catharsis";
-import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Upload from "./pages/Upload";
 import ResetPassword from "./pages/ResetPassword";
 import SessionChecker from "./components/SessionChecker";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -54,14 +54,6 @@ const RoutesWithAnimation = () => {
           }
         />
         <Route
-          path="/admin"
-          element={
-            <Page pageKey="admin">
-              <Admin />
-            </Page>
-          }
-        />
-        <Route
           path="/upload"
           element={
             <Page pageKey="upload">
@@ -82,6 +74,14 @@ const RoutesWithAnimation = () => {
           element={
             <Page pageKey="resetPassword">
               <ResetPassword />
+            </Page>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <Page pageKey="settings">
+              <Settings />
             </Page>
           }
         />

@@ -11,7 +11,6 @@ const Login = () => {
   useEffect(() => {
     return () => {
       dispatch(setPasswordRecoveryEvent(false));
-      console.log("test");
     };
   }, [dispatch]);
 
